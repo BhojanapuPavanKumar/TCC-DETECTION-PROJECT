@@ -1,0 +1,139 @@
+
+<style>
+  body { margin: 0; }
+  .wrap { padding: 8px 0 24px; }
+  .title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 20px; }
+  .section { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .07em; margin: 20px 0 8px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+  .card-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .card-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+  .card-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; line-height: 1.5; }
+  .good { background: #EAF3DE; } .good .card-val { color: #27500A; }
+  .warn { background: #FAEEDA; } .warn .card-val { color: #633806; }
+  .pipe { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-bottom: 4px; }
+  .pnode { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px 12px; font-size: 12px; color: var(--color-text-primary); white-space: nowrap; }
+  .parr { font-size: 14px; color: var(--color-text-tertiary); padding: 0 6px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .badge { font-size: 11px; padding: 2px 10px; border-radius: 20px; font-weight: 500; }
+  .b-green { background: #EAF3DE; color: #3B6D11; }
+  .b-amber { background: #FAEEDA; color: #854F0B; }
+  .b-blue  { background: #E6F1FB; color: #0C447C; }
+  .b-red   { background: #FCEBEB; color: #A32D2D; }
+  .feat { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ftag { font-size: 11px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: 4px; padding: 2px 8px; color: var(--color-text-secondary); font-family: var(--font-mono); }
+  .ftag.hi { background: #E6F1FB; color: #0C447C; border-color: #85B7EB; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-align: left; padding: 5px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  td { padding: 5px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+  tr:last-child td { border-bottom: none; }
+  .dot-green { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #63991b; margin-right: 5px; }
+  .dot-amber { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #EF9F27; margin-right: 5px; }
+</style>
+<div class="wrap">
+  <div class="title">INSAT-3D Cloud Monitoring System</div>
+  <div class="sub">End-to-end deep learning pipeline — CNN segmentation + BiGRU cloud behavior prediction</div>
+
+  <div class="section">Pipeline</div>
+  <div class="pipe">
+    <div class="pnode">INSAT-3D NPZ<br><span style="font-size:10px;color:var(--color-text-secondary)">2777 frames</span></div><div class="parr">→</div>
+    <div class="pnode">U-Net CNN<br><span style="font-size:10px;color:var(--color-text-secondary)">cloud masks</span></div><div class="parr">→</div>
+    <div class="pnode">detect_clusters<br><span style="font-size:10px;color:var(--color-text-secondary)">505K clusters</span></div><div class="parr">→</div>
+    <div class="pnode">track_clusters<br><span style="font-size:10px;color:var(--color-text-secondary)">493K records</span></div><div class="parr">→</div>
+    <div class="pnode">create_sequences<br><span style="font-size:10px;color:var(--color-text-secondary)">86K sequences</span></div><div class="parr">→</div>
+    <div class="pnode">BiGRU+Attention<br><span style="font-size:10px;color:var(--color-text-secondary)">dual output</span></div>
+  </div>
+
+  <div class="section">CNN — U-Net segmentation results</div>
+  <div class="grid4">
+    <div class="card good"><div class="card-label">IoU</div><div class="card-val">0.9997</div></div>
+    <div class="card good"><div class="card-label">Dice</div><div class="card-val">0.9999</div></div>
+    <div class="card good"><div class="card-label">Precision</div><div class="card-val">1.0000</div></div>
+    <div class="card good"><div class="card-label">Recall</div><div class="card-val">0.9997</div></div>
+  </div>
+
+  <div class="section">BiGRU — regression results</div>
+  <div class="grid4">
+    <div class="card good"><div class="card-label">mean_tb MAE</div><div class="card-val">2.58 K</div><div class="card-sub">Excellent intensity prediction</div></div>
+    <div class="card good"><div class="card-label">convective_core MAE</div><div class="card-val">0.043</div><div class="card-sub">Deep convection tracking</div></div>
+    <div class="card good"><div class="card-label">area MAE (log)</div><div class="card-val">0.437</div><div class="card-sub">Cloud size prediction</div></div>
+    <div class="card warn"><div class="card-label">Position MAE</div><div class="card-val">3.13°</div><div class="card-sub">~350 km — data limited</div></div>
+  </div>
+
+  <div class="section">BiGRU — behavior classification results</div>
+  <div class="grid3">
+    <div class="card good"><div class="card-label">INTENSIFYING recall</div><div class="card-val">67.6%</div><div class="card-sub">Finds 2 in 3 intensifying clouds</div></div>
+    <div class="card good"><div class="card-label">MERGING recall</div><div class="card-val">50.0%</div><div class="card-sub">Finds 1 in 2 merge events</div></div>
+    <div class="card good"><div class="card-label">SPLITTING recall</div><div class="card-val">38.7%</div><div class="card-sub">Finds 2 in 5 split events</div></div>
+  </div>
+
+  <div class="section">Model architecture</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-label" style="margin-bottom:8px">U-Net CNN</div>
+      <table>
+        <tr><td style="color:var(--color-text-secondary)">Architecture</td><td>Shallow U-Net, 3 encoder levels</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Parameters</td><td>51,025</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Input</td><td>128×128×1 patches</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Output</td><td>Binary cloud mask</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Loss</td><td>Binary crossentropy</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Training patches</td><td>867,575</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:8px">BiGRU + Temporal Attention</div>
+      <table>
+        <tr><td style="color:var(--color-text-secondary)">Architecture</td><td>BiGRU(64) → BiGRU(32) → Attention</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Parameters</td><td>~65,000</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Input</td><td>(8, 14) — 8 timesteps, 14 features</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Output heads</td><td>Regression (6) + Classification (6)</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Loss</td><td>Huber + Weighted CrossEntropy</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Best val loss</td><td>0.885 (epoch 11)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">Input features (14)</div>
+  <div class="feat">
+    <span class="ftag hi">centroid_lat</span>
+    <span class="ftag hi">centroid_lon</span>
+    <span class="ftag">area_km2</span>
+    <span class="ftag">mean_tb</span>
+    <span class="ftag">min_tb</span>
+    <span class="ftag">max_tb</span>
+    <span class="ftag">std_tb</span>
+    <span class="ftag">tb_p10</span>
+    <span class="ftag">convective_core</span>
+    <span class="ftag">cold_cloud_frac</span>
+    <span class="ftag">speed_kmh</span>
+    <span class="ftag">growth</span>
+    <span class="ftag hi">dlat</span>
+    <span class="ftag hi">dlon</span>
+  </div>
+
+  <div class="section">Behavior classes detected</div>
+  <div class="row">
+    <span class="badge b-green">STABLE — 65.8%</span>
+    <span class="badge b-amber">GROWING — 10.7%</span>
+    <span class="badge b-red">SHRINKING — 22.1%</span>
+    <span class="badge b-blue">INTENSIFYING — 0.8%</span>
+    <span class="badge b-amber">SPLITTING — 0.4%</span>
+    <span class="badge b-red">MERGING — 0.1%</span>
+  </div>
+
+  <div class="section">Status</div>
+  <table>
+    <tr><th>Component</th><th>Status</th><th>Result</th></tr>
+    <tr><td>INSAT NPZ ingestion</td><td><span class="dot-green"></span>Done</td><td>2777 frames, Jan–Feb 2025</td></tr>
+    <tr><td>CNN cloud segmentation</td><td><span class="dot-green"></span>Done</td><td>IoU=0.9997, Dice=0.9999</td></tr>
+    <tr><td>Cluster detection</td><td><span class="dot-green"></span>Done</td><td>505,177 clusters, 23 min</td></tr>
+    <tr><td>Cloud tracking</td><td><span class="dot-green"></span>Done</td><td>493K observations, 34 sec</td></tr>
+    <tr><td>Sequence creation</td><td><span class="dot-green"></span>Done</td><td>86,567 sequences (8×14)</td></tr>
+    <tr><td>BiGRU training</td><td><span class="dot-green"></span>Done</td><td>val_loss=0.885, acc=40.3%</td></tr>
+    <tr><td>Uncertainty bands</td><td><span class="dot-amber"></span>Next</td><td>Monte Carlo dropout</td></tr>
+    <tr><td>Visualization dashboard</td><td><span class="dot-amber"></span>Next</td><td>Real-time cloud monitor</td></tr>
+  </table>
+</div>

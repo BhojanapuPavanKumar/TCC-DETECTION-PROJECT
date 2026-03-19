@@ -1,0 +1,14 @@
+argparse
+concurrent
+joblib==1.5.3
+matplotlib==3.10.8
+numpy==1.23.5
+pandas==2.3.3
+pkg_resources
+plotly==6.6.0
+scikit-learn==1.7.2
+scipy==1.15.3
+scripts
+src
+tensorflow==2.10.0
+tqdm==4.67.3

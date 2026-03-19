@@ -1,0 +1,237 @@
+project
+├── README.MD
+├── data
+│   ├── clusters
+│   ├── cnn_dataset
+│   ├── lstm_dataset
+│   │   ├── X_sequences.npy
+│   │   ├── X_test.npy
+│   │   ├── X_train.npy
+│   │   ├── X_val.npy
+│   │   ├── behavior_encoder.save
+│   │   ├── class_weights.npy
+│   │   ├── feature_cols.npy
+│   │   ├── label_map.save
+│   │   ├── log_transform_cols.npy
+│   │   ├── scaler.save
+│   │   ├── target_cols.npy
+│   │   ├── target_scaler.save
+│   │   ├── y_behavior.npy
+│   │   ├── y_cls_test.npy
+│   │   ├── y_cls_train.npy
+│   │   ├── y_cls_val.npy
+│   │   ├── y_labels.npy
+│   │   ├── y_reg_test.npy
+│   │   ├── y_reg_train.npy
+│   │   ├── y_reg_val.npy
+│   │   ├── y_stage1_test.npy
+│   │   ├── y_stage1_train.npy
+│   │   ├── y_stage1_val.npy
+│   │   ├── y_stage2_test.npy
+│   │   ├── y_stage2_train.npy
+│   │   └── y_stage2_val.npy
+│   ├── metrics
+│   │   └── evaluation_metrics.npy
+│   ├── predicted_masks
+│   ├── prediction
+│   │   └── predictions.npy
+│   ├── raw_npz
+│   ├── samples
+│   └── storm_tracks
+├── logs
+│   ├── bigru
+│   │   ├── logs_training.txt
+│   │   ├── train
+│   │   │   ├── events.out.tfevents.1773858182.WIN-AGENT.16540.0.v2
+│   │   │   ├── events.out.tfevents.1773859260.WIN-AGENT.30144.0.v2
+│   │   │   ├── events.out.tfevents.1773860077.WIN-AGENT.30604.0.v2
+│   │   │   ├── events.out.tfevents.1773864492.WIN-AGENT.21176.0.v2
+│   │   │   ├── events.out.tfevents.1773865463.WIN-AGENT.30412.0.v2
+│   │   │   ├── events.out.tfevents.1773865677.WIN-AGENT.22096.0.v2
+│   │   │   ├── events.out.tfevents.1773866331.WIN-AGENT.29188.0.v2
+│   │   │   ├── events.out.tfevents.1773867025.WIN-AGENT.9140.0.v2
+│   │   │   ├── events.out.tfevents.1773867702.WIN-AGENT.21096.0.v2
+│   │   │   ├── events.out.tfevents.1773869332.WIN-AGENT.2728.0.v2
+│   │   │   ├── events.out.tfevents.1773869374.WIN-AGENT.14524.0.v2
+│   │   │   └── events.out.tfevents.1773871065.WIN-AGENT.30508.0.v2
+│   │   └── validation
+│   │       ├── events.out.tfevents.1773858225.WIN-AGENT.16540.1.v2
+│   │       ├── events.out.tfevents.1773859296.WIN-AGENT.30144.1.v2
+│   │       ├── events.out.tfevents.1773860096.WIN-AGENT.30604.1.v2
+│   │       ├── events.out.tfevents.1773864520.WIN-AGENT.21176.1.v2
+│   │       ├── events.out.tfevents.1773865706.WIN-AGENT.22096.1.v2
+│   │       ├── events.out.tfevents.1773866359.WIN-AGENT.29188.1.v2
+│   │       ├── events.out.tfevents.1773867050.WIN-AGENT.9140.1.v2
+│   │       ├── events.out.tfevents.1773867728.WIN-AGENT.21096.1.v2
+│   │       ├── events.out.tfevents.1773869403.WIN-AGENT.14524.1.v2
+│   │       └── events.out.tfevents.1773871103.WIN-AGENT.30508.1.v2
+│   ├── bigru_model_summary.txt
+│   ├── bigrustages
+│   │   ├── stage1
+│   │   │   ├── train
+│   │   │   │   ├── events.out.tfevents.1773901646.WIN-AGENT.26296.0.v2
+│   │   │   │   ├── events.out.tfevents.1773902148.WIN-AGENT.12308.0.v2
+│   │   │   │   ├── events.out.tfevents.1773903461.WIN-AGENT.4800.0.v2
+│   │   │   │   ├── events.out.tfevents.1773907176.WIN-AGENT.21176.0.v2
+│   │   │   │   └── events.out.tfevents.1773907842.WIN-AGENT.27764.0.v2
+│   │   │   └── validation
+│   │   │       ├── events.out.tfevents.1773901671.WIN-AGENT.26296.1.v2
+│   │   │       ├── events.out.tfevents.1773902172.WIN-AGENT.12308.1.v2
+│   │   │       ├── events.out.tfevents.1773903491.WIN-AGENT.4800.1.v2
+│   │   │       ├── events.out.tfevents.1773907203.WIN-AGENT.21176.1.v2
+│   │   │       └── events.out.tfevents.1773907871.WIN-AGENT.27764.1.v2
+│   │   └── stage2
+│   │       ├── train
+│   │       │   ├── events.out.tfevents.1773902611.WIN-AGENT.15240.0.v2
+│   │       │   ├── events.out.tfevents.1773903841.WIN-AGENT.18856.0.v2
+│   │       │   ├── events.out.tfevents.1773904203.WIN-AGENT.19692.0.v2
+│   │       │   ├── events.out.tfevents.1773904305.WIN-AGENT.20724.0.v2
+│   │       │   ├── events.out.tfevents.1773907646.WIN-AGENT.5488.0.v2
+│   │       │   └── events.out.tfevents.1773908377.WIN-AGENT.30196.0.v2
+│   │       └── validation
+│   │           ├── events.out.tfevents.1773902617.WIN-AGENT.15240.1.v2
+│   │           ├── events.out.tfevents.1773903847.WIN-AGENT.18856.1.v2
+│   │           ├── events.out.tfevents.1773904210.WIN-AGENT.19692.1.v2
+│   │           ├── events.out.tfevents.1773904312.WIN-AGENT.20724.1.v2
+│   │           ├── events.out.tfevents.1773907652.WIN-AGENT.5488.1.v2
+│   │           └── events.out.tfevents.1773908385.WIN-AGENT.30196.1.v2
+│   ├── cnn_model_summary.html
+│   ├── gru_progress_summary.html
+│   ├── insat_cloud_monitor_summary.html
+│   ├── stage1_stage2_full_summary.html
+│   ├── train
+│   │   ├── events.out.tfevents.1773810409.WIN-AGENT.28328.0.v2
+│   │   ├── events.out.tfevents.1773814311.WIN-AGENT.28212.0.v2
+│   │   ├── events.out.tfevents.1773817608.WIN-AGENT.13056.0.v2
+│   │   ├── events.out.tfevents.1773818571.WIN-AGENT.17280.0.v2
+│   │   ├── events.out.tfevents.1773840021.WIN-AGENT.16644.0.v2
+│   │   └── events.out.tfevents.1773843934.WIN-AGENT.11856.0.v2
+│   └── validation
+│       ├── events.out.tfevents.1773810479.WIN-AGENT.28328.1.v2
+│       ├── events.out.tfevents.1773814340.WIN-AGENT.28212.1.v2
+│       ├── events.out.tfevents.1773817624.WIN-AGENT.13056.1.v2
+│       ├── events.out.tfevents.1773818588.WIN-AGENT.17280.1.v2
+│       ├── events.out.tfevents.1773840027.WIN-AGENT.16644.1.v2
+│       └── events.out.tfevents.1773843940.WIN-AGENT.11856.1.v2
+├── main_pipeline.py
+├── models
+│   ├── bigru
+│   │   ├── cloud_bigru_best.keras
+│   │   ├── cloud_bigru_best_best.keras
+│   │   ├── cloud_bigru_final.keras
+│   │   ├── cloud_bigru_final_best.keras
+│   │   ├── cloud_monitor_bigru.keras
+│   │   └── cloud_monitor_bigru_final.keras
+│   ├── bigrustages
+│   │   ├── bigru_model_stage1.keras
+│   │   ├── bigru_model_stage2.keras
+│   │   ├── bigru_stage1.keras
+│   │   └── bigru_stage2.keras
+│   ├── cnn
+│   │   ├── unet_best.keras
+│   │   └── unet_cloud_detection.keras
+│   ├── gru
+│   │   ├── storm_prediction_gru.keras
+│   │   ├── storm_prediction_gru_final.keras
+│   │   ├── storm_prediction_gru_final_v1.keras
+│   │   └── storm_prediction_gru_v1.keras
+│   └── gru1
+│       ├── storm_prediction_gru.keras
+│       └── storm_prediction_gru_final.keras
+├── output
+│   ├── actual
+│   │   └── actual_2025-01-05.html
+│   ├── evaluation
+│   │   ├── attention_weights.png
+│   │   ├── bigru_training_curve.png
+│   │   ├── confusion_matrix.png
+│   │   ├── evaluation_per_feature.png
+│   │   ├── evaluation_report.png
+│   │   ├── gru_training_curve.png
+│   │   └── track_error_distribution.png
+│   ├── gru_predict_img
+│   │   ├── storm_animation_20260318_1430.html
+│   │   ├── storm_animation_20260318_1459.html
+│   │   ├── storm_forecast_20260318_1428.html
+│   │   └── storm_forecast_20260318_1454.html
+│   ├── pipeline_day
+│   │   └── pipeline_2025-01-05.json
+│   ├── predicted
+│   │   └── predicted_2025-01-05.html
+│   ├── scientific
+│   │   ├── results_2025-01-05.json
+│   │   └── results_2025-01-05_compact.json
+│   ├── validation
+│   │   ├── level1_case_study.png
+│   │   ├── level2_statistical.png
+│   │   └── level3_temporal.png
+│   └── visualization
+│       ├── cloud_monitor_cluster_6846.html
+│       ├── cloud_s1s2_cluster_6846.html
+│       └── cluster_6846_summary.json
+├── project_structure.txt
+├── requirements.txt
+├── scripts
+│   ├── __pycache__
+│   ├── clean_previous_data.py
+│   ├── find_timestamp.py
+│   ├── generate_requirement.py
+│   ├── generate_tree.py
+│   └── rename_insat_files.py
+├── src
+│   ├── dashboard
+│   │   ├── build_actual_dashboard.py
+│   │   ├── build_predicted_dashboard.py
+│   │   ├── export_results.py
+│   │   └── run_pipeline_day.py
+│   ├── dataset
+│   │   └── create_cnn_dataset.py
+│   ├── detection
+│   │   ├── __pycache__
+│   │   └── detect_clusters.py
+│   ├── lifecycle
+│   │   ├── __pycache__
+│   │   └── create_sequences.py
+│   ├── prediction
+│   │   ├── __pycache__
+│   │   ├── predict_dataset.py
+│   │   ├── predict_future_frames.py
+│   │   ├── predict_masks.py
+│   │   ├── predict_next_frame.py
+│   │   └── validate_single_frame.py
+│   ├── tracking
+│   │   ├── __pycache__
+│   │   └── track_clusters.py
+│   ├── training
+│   │   ├── train_cnn.py
+│   │   ├── train_gru.py
+│   │   ├── train_gru_stage1.py
+│   │   ├── train_gru_stage2.py
+│   │   └── train_lstm.py
+│   └── utils
+│       ├── __pycache__
+│       ├── evaluation
+│       │   ├── __pycache__
+│       │   ├── animate_storm.py
+│       │   ├── evaluate_bigru.py
+│       │   ├── evaluate_predictions.py
+│       │   ├── evaluate_s1_s2.py
+│       │   ├── plot_future_predictions.py
+│       │   ├── plot_storm_track_single.py
+│       │   ├── validate_storm.py
+│       │   ├── visualize_cloud_predictions.py
+│       │   ├── visualize_cloud_s1s2.py
+│       │   └── visualize_predictions.py
+│       └── storm_viz_utils.py
+├── test_main.py
+├── validation_images
+│   ├── 20260101_0245.png
+│   ├── 20260101_1815.png
+│   ├── 20260101_2015.png
+│   ├── 20260101_2215.png
+│   ├── 20260202_2315.png
+│   ├── future_storm_path.png
+│   ├── next_storm_prediction.png
+│   ├── storm_track_prediction.png
+│   └── storm_track_single.png
+└── venv310

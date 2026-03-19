@@ -1,0 +1,92 @@
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ sequence_input (InputLayer)    [(None, 8, 14)]      0           []                               
+                                                                                                  
+ bigru_1 (Bidirectional)        (None, 8, 128)       30720       ['sequence_input[0][0]']         
+                                                                                                  
+ bn_1 (BatchNormalization)      (None, 8, 128)       512         ['bigru_1[0][0]']                
+                                                                                                  
+ drop_1 (Dropout)               (None, 8, 128)       0           ['bn_1[0][0]']                   
+                                                                                                  
+ bigru_2 (Bidirectional)        (None, 8, 64)        31104       ['drop_1[0][0]']                 
+                                                                                                  
+ bn_2 (BatchNormalization)      (None, 8, 64)        256         ['bigru_2[0][0]']                
+                                                                                                  
+ drop_2 (Dropout)               (None, 8, 64)        0           ['bn_2[0][0]']                   
+                                                                                                  
+ attention (TemporalAttention)  ((None, 64),         2080        ['drop_2[0][0]']                 
+                                 (None, 8, 1))                                                    
+                                                                                                  
+ reg_dense_1 (Dense)            (None, 64)           4160        ['attention[0][0]']              
+                                                                                                  
+ reg_drop (Dropout)             (None, 64)           0           ['reg_dense_1[0][0]']            
+                                                                                                  
+ cls_dense_1 (Dense)            (None, 32)           2080        ['attention[0][0]']              
+                                                                                                  
+ reg_dense_2 (Dense)            (None, 32)           2080        ['reg_drop[0][0]']               
+                                                                                                  
+ cls_drop (Dropout)             (None, 32)           0           ['cls_dense_1[0][0]']            
+                                                                                                  
+ regression_output (Dense)      (None, 6)            198         ['reg_dense_2[0][0]']            
+                                                                                                  
+ classification_output (Dense)  (None, 6)            198         ['cls_drop[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 73,388
+Trainable params: 73,004
+Non-trainable params: 384
+__________________________________________________________________________________________________
+
+
+============================================================
+TRAINING CONFIGURATION
+============================================================
+Input shape      : (8, 14) — 8 timesteps, 14 features
+Regression output: 6 targets
+Class output     : 6 behaviors
+
+Features:
+   1. centroid_lat
+   2. centroid_lon
+   3. area_km2
+   4. mean_tb
+   5. min_tb
+   6. max_tb
+   7. std_tb
+   8. tb_p10
+   9. convective_core
+  10. cold_cloud_frac
+  11. speed_kmh
+  12. growth
+  13. dlat
+  14. dlon
+
+Regression targets:
+  1. centroid_lat
+  2. centroid_lon
+  3. area_km2
+  4. mean_tb
+  5. convective_core
+  6. growth
+
+Behavior classes:
+  0. GROWING
+  1. INTENSIFYING
+  2. MERGING
+  3. SHRINKING
+  4. SPLITTING
+  5. STABLE
+
+EVALUATION RESULTS
+============================================================
+Classification accuracy : 40.3%
+MERGING recall          : 50.0%
+SPLITTING recall        : 38.7%
+INTENSIFYING recall     : 67.6%
+mean_tb MAE             : 2.58 K
+Position MAE            : 3.13 deg (~350 km)
+val_loss (best epoch)   : 0.885
+Best epoch              : 11 / 19
+Total parameters        : ~65,000

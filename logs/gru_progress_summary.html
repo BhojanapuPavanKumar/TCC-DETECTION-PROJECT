@@ -1,0 +1,57 @@
+
+<style>
+  .section { font-size:11px; font-weight:500; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:.06em; margin:14px 0 7px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { font-size:11px; font-weight:500; color:var(--color-text-secondary); text-align:left; padding:6px 10px; border-bottom:1px solid var(--color-border-tertiary); }
+  td { padding:7px 10px; border-bottom:1px solid var(--color-border-tertiary); color:var(--color-text-primary); }
+  tr:last-child td { border-bottom:none; }
+  .best { background:#EAF3DE; }
+  .best td { color:#27500A; font-weight:500; }
+  .tag { font-size:11px; font-weight:500; padding:2px 8px; border-radius:20px; }
+  .t-good { background:#EAF3DE; color:#3B6D11; }
+  .t-warn { background:#FAEEDA; color:#854F0B; }
+  .t-bad  { background:#FCEBEB; color:#A32D2D; }
+  .note { padding:11px 14px; border-radius:8px; border:1px solid var(--color-border-tertiary); background:var(--color-background-secondary); font-size:13px; color:var(--color-text-primary); line-height:1.6; margin-bottom:8px; }
+  .row { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .card { flex:1; min-width:110px; border-radius:8px; padding:10px 12px; border:1px solid var(--color-border-tertiary); }
+  .clabel { font-size:11px; font-weight:500; margin-bottom:3px; }
+  .cval { font-size:17px; font-weight:500; }
+  .csub { font-size:11px; margin-top:3px; color:var(--color-text-secondary); }
+  .good { background:#EAF3DE; border-color:#97C459; } .good .clabel,.good .cval { color:#27500A; }
+  .warn { background:#FAEEDA; border-color:#EF9F27; } .warn .clabel,.warn .cval { color:#633806; }
+</style>
+
+<div class="section">Progress across all runs</div>
+<table>
+  <tr>
+    <th>Run</th><th>Track error</th><th>Lat MAE</th><th>Lon MAE</th><th>Val loss</th><th>What changed</th>
+  </tr>
+  <tr>
+    <td>Original</td><td>293 km</td><td>1.61°</td><td>2.06°</td><td>0.134</td><td>Baseline — 5K sequences, bad scaler</td>
+  </tr>
+  <tr>
+    <td>Run 2</td><td>533 km</td><td>2.46°</td><td>3.82°</td><td>0.179</td><td>Scaler mismatch — inverse transform broken</td>
+  </tr>
+  <tr>
+    <td>Run 3</td><td>440 km</td><td>2.42°</td><td>2.81°</td><td>0.197</td><td>Log transform added, 123K sequences</td>
+  </tr>
+  <tr>
+    <td>Run 4</td><td>456 km</td><td>2.77°</td><td>2.59°</td><td>0.136</td><td>Tracker fixed (min 9 frames), 123K sequences</td>
+  </tr>
+  <tr class="best">
+    <td>Run 5 (current)</td><td>429 km</td><td>2.60°</td><td>2.39°</td><td>0.135</td><td>Best tracker + cleaner data</td>
+  </tr>
+</table>
+
+<div class="section">Current model quality</div>
+<div class="row">
+  <div class="card good"><div class="clabel">Track error</div><div class="cval">429 km</div><div class="csub">Best so far. Slowly improving.</div></div>
+  <div class="card good"><div class="clabel">mean_tb MAE</div><div class="cval">2.31 K</div><div class="csub">Excellent — within 2K.</div></div>
+  <div class="card good"><div class="clabel">speed MAE</div><div class="cval">0.56 km/h</div><div class="csub">Excellent after log transform.</div></div>
+  <div class="card warn"><div class="clabel">Lat MAE</div><div class="cval">2.60°</div><div class="csub">~289 km. Main bottleneck.</div></div>
+</div>
+
+<div class="section">Ceiling analysis — why 429 km is hard to beat with current data</div>
+<div class="note">
+  Your data has frame-to-frame lat jumps with P90=2.65° — meaning 10% of consecutive observations are 2.65° apart naturally. The model cannot predict better than the noise floor in the data. To get under 200 km track error you need either: (1) pressure + wind data from ERA5/IMD, or (2) longer sequences (SEQUENCE_LENGTH=16 instead of 8), or (3) multi-step prediction with recursive forecasting.
+</div>

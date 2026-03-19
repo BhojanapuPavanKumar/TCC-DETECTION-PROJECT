@@ -1,0 +1,148 @@
+========== TRAINING START ==========
+Start: 2026-03-19 01:38:10.797966
+GPU enabled (mixed precision)
+
+Loading dataset...
+X shape: (86567, 8, 14)
+y_reg shape: (86567, 6)
+y_cls shape: (86567,)
+Class dist: (array([0, 1, 2, 3, 4, 5]), array([ 9274,   732,   123, 19140,   340, 56958], dtype=int64))
+
+Feature stats:
+Feature 0: mean=-0.009, std=0.894
+Feature 1: mean=-0.073, std=0.957
+Feature 2: mean=0.296, std=1.011
+Feature 3: mean=-0.267, std=1.022
+Feature 4: mean=-0.250, std=0.989
+Feature 5: mean=0.202, std=0.940
+Feature 6: mean=0.117, std=0.933
+Feature 7: mean=-0.228, std=0.989
+Feature 8: mean=0.177, std=1.086
+Feature 9: mean=0.287, std=0.935
+Feature 10: mean=-0.044, std=1.017
+Feature 11: mean=-0.075, std=0.904
+Feature 12: mean=0.005, std=1.315
+Feature 13: mean=-0.022, std=1.237
+Train: (69253, 8, 14)
+Val  : (17314, 8, 14)
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 2, 3, 4, 5], dtype=int64), array([2177, 2513,  975, 4766, 1699, 5184], dtype=int64))
+True dist: (array([0, 1, 2, 3, 4, 5]), array([ 1852,   153,    24,  3787,    79, 11419], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 01:45:12.915093
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 01:54:22.343971
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+========== TRAINING START ==========
+Start: 2026-03-19 01:56:00.209904
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+========== TRAINING START ==========
+Start: 2026-03-19 01:57:55.912638
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 2, 3, 4, 5], dtype=int64), array([3272, 2242,  635, 4008, 2631, 5163], dtype=int64))
+True dist: (array([0, 1, 2, 3, 4, 5]), array([ 1992,   149,    23,  4071,    83, 11633], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 02:03:28.424698
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 02:08:50.367465
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 2, 3, 4, 5], dtype=int64), array([3477, 2903, 1407, 3788, 2287, 4089], dtype=int64))
+True dist: (array([0, 1, 2, 3, 4, 5]), array([ 1992,   149,    23,  4071,    83, 11633], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 02:14:43.433191
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 02:20:24.192916
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 3, 5], dtype=int64), array([ 1518,    58,  1654, 14721], dtype=int64))
+True dist: (array([0, 1, 2, 3, 4, 5]), array([ 1992,   149,    23,  4071,    83, 11633], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 02:27:29.631341
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 02:31:40.947202
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 3, 5], dtype=int64), array([ 1044,    44,  1526, 15337], dtype=int64))
+True dist: (array([0, 1, 2, 3, 4, 5]), array([ 1992,   149,    23,  4071,    83, 11633], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 02:38:23.368605
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 02:58:51.162334
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2, 3, 4, 5]), array([ 7282,   583,   100, 15069,   257, 45325], dtype=int64))
+========== TRAINING START ==========
+Start: 2026-03-19 02:59:33.046243
+GPU enabled
+
+Loading dataset...
+Train: (68616, 8, 14)
+Val  : (17951, 8, 14)
+Class dist (train): (array([0, 1, 2]), array([  583, 67676,   357], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([1], dtype=int64), array([17951], dtype=int64))
+True dist: (array([0, 1, 2]), array([  149, 17696,   106], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 03:05:45.259536
+========== TRAINING END ==========
+========== TRAINING START ==========
+Start: 2026-03-19 03:27:44.491822
+GPU enabled
+
+Loading dataset...
+Train: (109384, 8, 14)
+Val  : (26601, 8, 14)
+Class dist (train): (array([0, 1, 2]), array([108036,    392,    956], dtype=int64))
+
+===== VALIDATION =====
+Pred dist: (array([0, 1, 2], dtype=int64), array([26543,    14,    44], dtype=int64))
+True dist: (array([0, 1, 2]), array([26267,   107,   227], dtype=int64))
+Final model saved: models/bigru\cloud_bigru_final.keras
+End: 2026-03-19 03:37:09.179150
+========== TRAINING END ==========
