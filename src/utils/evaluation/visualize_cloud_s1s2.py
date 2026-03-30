@@ -2,7 +2,6 @@
 """
 visualize_cloud_s1s2.py
 Validates Stage1 + Stage2 predictions against actual cloud behavior
-Cluster 6846 — Indian Ocean, Jan 5-6 2025
 """
 
 import os
@@ -12,14 +11,14 @@ import joblib
 import tensorflow as tf
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
+from scripts.select_best_case import select_best_case
+CLUSTER_ID, _ = select_best_case()
 DATA_DIR   = "data/lstm_dataset"
 MODEL_DIR  = "models/bigrustages"
 TRACKS     = "data/storm_tracks/storm_tracks.csv"
 OUT_DIR    = "output/visualization"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-CLUSTER_ID   = 6846
 SEQ_LEN      = 8
 THRESHOLD_S1 = 0.3
 
@@ -522,7 +521,7 @@ def build_dashboard(d):
     fig.update_layout(
         title=dict(
             text=(f"Cloud Cluster {CLUSTER_ID} — Stage 1 + Stage 2 Validation<br>"
-                  f"<sup>Jan 5-6 2025 | {n} frames | "
+                  f"<sup>{_} | {n} frames | "
                   f"Threshold S1={THRESHOLD_S1} | "
                   f"Events found: {n_events_found}/{n_true_events} | "
                   f"Indian Ocean (5.7N, 69.2E)</sup>"),

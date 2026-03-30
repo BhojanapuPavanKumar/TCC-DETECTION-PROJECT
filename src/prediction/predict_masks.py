@@ -10,7 +10,7 @@ INPUT_DIR  = "data/raw_npz"
 OUTPUT_DIR = "data/predicted_masks"
 
 PATCH_SIZE = 128
-BATCH_SIZE = 128
+BATCH_SIZE = 4
 
 # Match exactly to create_cnn_dataset.py
 TB_MIN = 180
@@ -65,13 +65,18 @@ def main():
         out_path = os.path.join(OUTPUT_DIR, name + "_mask.npy")
 
         if os.path.exists(out_path):
-            continue
-
+            try:
+                mask = np.load(out_path)
+                if mask.size > 0:
+                    continue
+            except:
+                pass
         try:
             data = np.load(file)
             tb   = data["TIR1_TEMP"].astype(np.float32)
         except Exception as e:
-            print(f"\nSkipping corrupted file: {file} | {e}")
+            print(f"Skipping corrupted file: {file} | {e}")
+            os.rename(file, "data/corrupted_npz/" + os.path.basename(file))
             continue
 
         h, w = tb.shape

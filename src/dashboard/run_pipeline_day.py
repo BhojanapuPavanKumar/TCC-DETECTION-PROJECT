@@ -5,7 +5,8 @@ Takes 1 day of storm_tracks data, runs Stage1+Stage2 predictions
 on all clusters with enough frames, saves results to JSON.
 """
 
-import os
+
+import os,sys
 import json
 import numpy as np
 import pandas as pd
@@ -13,6 +14,10 @@ import joblib
 import tensorflow as tf
 from datetime import datetime
 from tqdm import tqdm
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+from scripts.select_best_case import select_best_case
+_, TARGET_DATE = select_best_case()
 
 DATA_DIR   = "data/lstm_dataset"
 MODEL_DIR  = "models/bigrustages"
@@ -20,7 +25,6 @@ TRACKS     = "data/storm_tracks/storm_tracks.csv"
 OUT_DIR    = "output/pipeline_day"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-TARGET_DATE  = "2025-01-05"
 SEQ_LEN      = 8
 THRESHOLD_S1 = 0.3
 
@@ -213,14 +217,58 @@ def main():
         total_events_found += n_events_found
 
     # Day-level summary
+    # Day-level summary (with per-class accuracy)
+
+    true_counts = {
+        "NORMAL": 0,
+        "ORGANIZING": 0,
+        "INTENSIFYING": 0
+    }
+
+    correct_counts = {
+        "NORMAL": 0,
+        "ORGANIZING": 0,
+        "INTENSIFYING": 0
+    }
+
+    # iterate through all clusters + steps
+    for cluster in results["clusters"].values():
+        for step in cluster["steps"]:
+            true_cls = step["true_grouped"]
+            pred_cls = step["pred_final"]
+
+            true_counts[true_cls] += 1
+
+            if true_cls == pred_cls:
+                correct_counts[true_cls] += 1
+
+
     results["summary"] = {
-        "total_predictions"   : total_steps,
-        "overall_accuracy"    : round(total_correct / total_steps, 4)
-                                if total_steps > 0 else 0,
-        "total_events_true"   : total_events_true,
-        "total_events_found"  : total_events_found,
-        "event_recall"        : round(total_events_found / total_events_true, 4)
-                                if total_events_true > 0 else 0,
+        "total_predictions": total_steps,
+
+        "overall_accuracy":
+            round(total_correct / total_steps, 4)
+            if total_steps > 0 else 0,
+
+        "total_events_true": total_events_true,
+
+        "total_events_found": total_events_found,
+
+        "event_recall":
+            round(total_events_found / total_events_true, 4)
+            if total_events_true > 0 else 0,
+
+        "normal_accuracy":
+            round(correct_counts["NORMAL"] / true_counts["NORMAL"], 4)
+            if true_counts["NORMAL"] > 0 else 0,
+
+        "organizing_accuracy":
+            round(correct_counts["ORGANIZING"] / true_counts["ORGANIZING"], 4)
+            if true_counts["ORGANIZING"] > 0 else 0,
+
+        "intensifying_accuracy":
+            round(correct_counts["INTENSIFYING"] / true_counts["INTENSIFYING"], 4)
+            if true_counts["INTENSIFYING"] > 0 else 0,
     }
 
     print(f"\nDay summary:")
@@ -228,6 +276,9 @@ def main():
     print(f"  Overall accuracy  : {results['summary']['overall_accuracy']:.4f}")
     print(f"  Event recall      : {results['summary']['event_recall']:.4f}")
     print(f"  Events found      : {total_events_found}/{total_events_true}")
+    print(f"Normal accuracy   : {results['summary']['normal_accuracy']:.4f}")
+    print(f"Organizing acc    : {results['summary']['organizing_accuracy']:.4f}")
+    print(f"Intensifying acc  : {results['summary']['intensifying_accuracy']:.4f}")
 
     out_json = os.path.join(OUT_DIR, f"pipeline_{TARGET_DATE}.json")
     with open(out_json, "w") as f:

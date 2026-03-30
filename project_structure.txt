@@ -1,10 +1,11 @@
 project
+├── .git
+├── .gitignore
 ├── README.MD
 ├── data
 │   ├── clusters
 │   ├── cnn_dataset
 │   ├── lstm_dataset
-│   │   ├── X_sequences.npy
 │   │   ├── X_test.npy
 │   │   ├── X_train.npy
 │   │   ├── X_val.npy
@@ -16,11 +17,9 @@ project
 │   │   ├── scaler.save
 │   │   ├── target_cols.npy
 │   │   ├── target_scaler.save
-│   │   ├── y_behavior.npy
 │   │   ├── y_cls_test.npy
 │   │   ├── y_cls_train.npy
 │   │   ├── y_cls_val.npy
-│   │   ├── y_labels.npy
 │   │   ├── y_reg_test.npy
 │   │   ├── y_reg_train.npy
 │   │   ├── y_reg_val.npy
@@ -30,11 +29,7 @@ project
 │   │   ├── y_stage2_test.npy
 │   │   ├── y_stage2_train.npy
 │   │   └── y_stage2_val.npy
-│   ├── metrics
-│   │   └── evaluation_metrics.npy
 │   ├── predicted_masks
-│   ├── prediction
-│   │   └── predictions.npy
 │   ├── raw_npz
 │   ├── samples
 │   └── storm_tracks
@@ -123,8 +118,6 @@ project
 │   │   ├── cloud_monitor_bigru.keras
 │   │   └── cloud_monitor_bigru_final.keras
 │   ├── bigrustages
-│   │   ├── bigru_model_stage1.keras
-│   │   ├── bigru_model_stage2.keras
 │   │   ├── bigru_stage1.keras
 │   │   └── bigru_stage2.keras
 │   ├── cnn
@@ -140,7 +133,10 @@ project
 │       └── storm_prediction_gru_final.keras
 ├── output
 │   ├── actual
-│   │   └── actual_2025-01-05.html
+│   │   └── actual_2025-02-06.html
+│   ├── cnn_visualization
+│   │   ├── cnn_actual_vs_predicted_20260319_1811.png
+│   │   └── cnn_detailed_20250103_0945.png
 │   ├── evaluation
 │   │   ├── attention_weights.png
 │   │   ├── bigru_training_curve.png
@@ -155,31 +151,34 @@ project
 │   │   ├── storm_forecast_20260318_1428.html
 │   │   └── storm_forecast_20260318_1454.html
 │   ├── pipeline_day
-│   │   └── pipeline_2025-01-05.json
+│   │   └── pipeline_2025-02-06.json
+│   ├── pipeline_state.json
 │   ├── predicted
-│   │   └── predicted_2025-01-05.html
+│   │   └── predicted_2025-02-06.html
 │   ├── scientific
-│   │   ├── results_2025-01-05.json
-│   │   └── results_2025-01-05_compact.json
+│   │   ├── results_2025-02-06.json
+│   │   └── results_2025-02-06_compact.json
 │   ├── validation
 │   │   ├── level1_case_study.png
 │   │   ├── level2_statistical.png
 │   │   └── level3_temporal.png
 │   └── visualization
-│       ├── cloud_monitor_cluster_6846.html
-│       ├── cloud_s1s2_cluster_6846.html
-│       └── cluster_6846_summary.json
+│       └── cloud_s1s2_cluster_50526.html
 ├── project_structure.txt
 ├── requirements.txt
 ├── scripts
 │   ├── __pycache__
 │   ├── clean_previous_data.py
+│   ├── find_best_day.py
 │   ├── find_timestamp.py
 │   ├── generate_requirement.py
+│   ├── generate_scientific_summary.py
 │   ├── generate_tree.py
-│   └── rename_insat_files.py
+│   ├── rename_insat_files.py
+│   └── select_best_case.py
 ├── src
 │   ├── dashboard
+│   │   ├── __pycache__
 │   │   ├── build_actual_dashboard.py
 │   │   ├── build_predicted_dashboard.py
 │   │   ├── export_results.py
@@ -194,11 +193,7 @@ project
 │   │   └── create_sequences.py
 │   ├── prediction
 │   │   ├── __pycache__
-│   │   ├── predict_dataset.py
-│   │   ├── predict_future_frames.py
-│   │   ├── predict_masks.py
-│   │   ├── predict_next_frame.py
-│   │   └── validate_single_frame.py
+│   │   └── predict_masks.py
 │   ├── tracking
 │   │   ├── __pycache__
 │   │   └── track_clusters.py
@@ -212,16 +207,11 @@ project
 │       ├── __pycache__
 │       ├── evaluation
 │       │   ├── __pycache__
-│       │   ├── animate_storm.py
 │       │   ├── evaluate_bigru.py
-│       │   ├── evaluate_predictions.py
 │       │   ├── evaluate_s1_s2.py
-│       │   ├── plot_future_predictions.py
-│       │   ├── plot_storm_track_single.py
-│       │   ├── validate_storm.py
-│       │   ├── visualize_cloud_predictions.py
+│       │   ├── v_c_s1s2.py
 │       │   ├── visualize_cloud_s1s2.py
-│       │   └── visualize_predictions.py
+│       │   └── visualize_cnn.py
 │       └── storm_viz_utils.py
 ├── test_main.py
 ├── validation_images

@@ -329,6 +329,12 @@ def track(frames):
 # ================================
 
 def main():
+
+    out_path = os.path.join(OUTPUT_DIR, "storm_tracks.csv")
+
+    if os.path.exists(out_path):
+        print("Tracking already completed — skipping")
+        return
     frames = load_frames()
     print(f"Frames loaded: {len(frames)}")
 

@@ -39,13 +39,20 @@ def process_file(mask_file):
     out_file = os.path.join(OUTPUT_DIR, name + "_clusters.csv")
 
     if os.path.exists(out_file):
+        try:
+            df = pd.read_csv(out_file)
+            if len(df) > 0:
+                return 0
+        except:
+            pass
+    if not os.path.exists(mask_file):
         return 0
     if not os.path.exists(npz_path):
         return 0
 
     try:
         mask = np.load(mask_file)
-        data = np.load(npz_path)
+        data = np.load(npz_path, allow_pickle=False)
         tb   = data["TIR1_TEMP"].astype(np.float32)
         lat  = data["Latitude"].astype(np.float32)
         lon  = data["Longitude"].astype(np.float32)
@@ -117,11 +124,7 @@ def process_file(mask_file):
 
 def main():
     mask_files = sorted(glob.glob(os.path.join(MASK_DIR, "*_mask.npy")))
-    pending    = [f for f in mask_files
-                  if not os.path.exists(
-                      os.path.join(OUTPUT_DIR,
-                                   os.path.basename(f).replace(
-                                       "_mask.npy", "_clusters.csv")))]
+    pending    = mask_files
 
     print(f"Total masks : {len(mask_files)}")
     print(f"Pending     : {len(pending)}")
@@ -132,7 +135,7 @@ def main():
 
     # ---- Check CPU cores ----
     import multiprocessing
-    n_cores = max(1, multiprocessing.cpu_count() - 1)
+    n_cores = min(4, max(1, multiprocessing.cpu_count() - 1))
     print(f"Using {n_cores} CPU cores")
 
     total = 0
