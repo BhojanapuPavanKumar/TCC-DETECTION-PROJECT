@@ -1,0 +1,220 @@
+ py src/dataset/convlstm_mc/create_seq_convlstm.py                                      
+Total raw files: 2777
+
+Checking brightness temperature statistics...
+  Sampled 20 files
+  Mean of min  Tb : 179.86 K
+  Mean of max  Tb : 313.71 K
+  Mean of mean Tb : 273.59 K
+
+Target sequences : 200,000 (40,000 per class)
+Estimated X size : 15.3 GB (uncompressed npy)
+Estimated peak   : 24.9 GB (during merge)
+
+  Free disk space : 77.3 GB
+  Required (est.) : 24.9 GB
+  OK: sufficient space.
+
+Building sequences:  51%|██████████████▊              | 1419/2777 [06:45<05:29,  4.12it/s] 
+[Done] All classes reached 40,000 — stopping early.
+Building sequences:  51%|██████████████▊              | 1420/2777 [06:45<06:27,  3.50it/s] 
+
+Interim class distribution:
+  NON-TCC        →   40,000  ( 20.0%)  ██████████
+  ORGANIZING     →   40,000  ( 20.0%)  ██████████
+  INTENSIFYING   →   40,000  ( 20.0%)  ██████████
+  MATURE         →   40,000  ( 20.0%)  ██████████
+  DISSIPATING    →   40,000  ( 20.0%)  ██████████
+
+Streaming merge (memory-safe)...
+  Total samples   : 200,000
+  Sample shape    : (5, 64, 64, 1)
+Merging chunks: 100%|███████████████████████████████████| 467/467 [00:43<00:00, 10.67it/s] 
+
+Finalising output files (writing valid .npy format)...
+  → X saved : data/convlstm_mc_dataset\X.npy
+  → y saved : data/convlstm_mc_dataset\y.npy
+
+Cleaning up temp chunk files...
+
+Verifying saved files...
+  X shape : (200000, 5, 64, 64, 1)
+  y shape : (200000,)
+  X dtype : float32
+  y dtype : int32
+
+============================================================
+Dataset saved  : data/convlstm_mc_dataset
+Total sequences: 200,000
+Output shape   : (200000, 5, 64, 64, 1)
+
+Final class distribution:
+  NON-TCC        →   40,000  ( 20.0%)  ██████████
+  ORGANIZING     →   40,000  ( 20.0%)  ██████████
+  INTENSIFYING   →   40,000  ( 20.0%)  ██████████
+  MATURE         →   40,000  ( 20.0%)  ██████████
+  DISSIPATING    →   40,000  ( 20.0%)  ██████████
+
+Skipped — corrupt     : 17
+Skipped — missing key : 0
+Skipped — no patches  : 0
+Skipped — NaN/flat    : 231244
+Skipped — class cap   : 452320
+
+Disk usage:
+  X.npy : 15.26 GB
+  y.npy : 0.001 GB
+  Total : 15.26 GB
+============================================================
+
+
+
+
+
+
+
+
+epoch,accuracy,auc_pr,auc_roc,loss,macro_f1,top2_acc,val_accuracy,val_auc_pr,val_auc_roc,val_loss,val_macro_f1,val_top2_acc
+0,0.5878999829292297,0.679377019405365,0.8731552958488464,0.6218978762626648,0.5869373083114624,0.8103713989257812,0.8048333525657654,0.8843318819999695,0.9665057063102722,0.3541501760482788,0.8054812550544739,0.9711999893188477
+1,0.777899980545044,0.8616616129875183,0.9589104652404785,0.36518508195877075,0.7801205515861511,0.9604071378707886,0.7218666672706604,0.8279736638069153,0.9468744993209839,0.39707911014556885,0.7195974588394165,0.9408000111579895
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+py src/training/train_convlstm_mc.py
+✓ GPU detected (1 device(s))
+[STEP 1/8] Loading data...
+Dataset loaded — X: (200000, 5, 64, 64, 1)  y: (200000,)
+Class distribution:
+  NON-TCC        [0] → 40,000  (20.0%)
+  ORGANIZING     [1] → 40,000  (20.0%)
+  INTENSIFYING   [2] → 40,000  (20.0%)
+  MATURE         [3] → 40,000  (20.0%)
+  DISSIPATING    [4] → 40,000  (20.0%)
+
+Original spatial: 64×64  →  Model input: 64×64
+VRAM reduction from resize: 1.0×
+
+[STEP 2/8] Splitting indices (stratified)...
+  Train: 140,000  Val: 30,000  Test: 30,000
+
+[STEP 3/8] Computing class weights...
+  Class weights: {'NON-TCC': '1.000', 'ORGANIZING': '1.000', 'INTENSIFYING': '1.000', 'MATURE': '1.000', 'DISSIPATING': '1.000'}
+
+[STEP 4/8] Building tf.data generators...
+2026-04-03 12:39:01.458807: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-04-03 12:39:01.916725: I tensorflow/core/common_runtime/gpu/gpu_process_state.cc:222] Using CUDA malloc Async allocator for GPU: 0
+2026-04-03 12:39:01.917061: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1616] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1649 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2050, pci bus id: 0000:01:00.0, compute capability: 8.6
+
+[STEP 5/8] Building model...
+✓ Loading checkpoint — resuming training
+Model: "ConvLSTM_MC_Residual_SE"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to
+==================================================================================================
+ seq_input (InputLayer)         [(None, 5, 64, 64,   0           []
+                                1)]
+
+ augmentation (TrainingOnlyAugm  (None, 5, 64, 64, 1  0          ['seq_input[0][0]']
+ entation)                      )
+
+ clstm1 (ConvLSTM2D)            (None, 5, 64, 64, 3  38144       ['augmentation[0][0]']
+                                2)
+
+ bn1 (BatchNormalization)       (None, 5, 64, 64, 3  128         ['clstm1[0][0]']
+                                2)
+
+ clstm2 (ConvLSTM2D)            (None, 5, 64, 64, 4  138432      ['bn1[0][0]']
+                                8)
+
+ bn2 (BatchNormalization)       (None, 5, 64, 64, 4  192         ['clstm2[0][0]']
+                                8)
+
+ skip1_proj (ConvLSTM2D)        (None, 5, 64, 64, 4  15552       ['bn1[0][0]']
+                                8)
+
+ res1 (Add)                     (None, 5, 64, 64, 4  0           ['bn2[0][0]',
+                                8)                                'skip1_proj[0][0]']
+
+ clstm3 (ConvLSTM2D)            (None, 64, 64, 48)   166080      ['res1[0][0]']
+
+ bn3 (BatchNormalization)       (None, 64, 64, 48)   192         ['clstm3[0][0]']
+
+ skip2_last (Lambda)            (None, 64, 64, 48)   0           ['res1[0][0]']
+
+ res2 (Add)                     (None, 64, 64, 48)   0           ['bn3[0][0]',
+                                                                  'skip2_last[0][0]']
+
+ tf.math.reduce_mean (TFOpLambd  (None, 1, 1, 48)    0           ['res2[0][0]']
+ a)
+
+ sattn_sq (Dense)               (None, 1, 1, 12)     588         ['tf.math.reduce_mean[0][0]']
+
+ sattn_ex (Dense)               (None, 1, 1, 48)     624         ['sattn_sq[0][0]']
+
+ sattn_scale (Multiply)         (None, 64, 64, 48)   0           ['res2[0][0]',
+                                                                  'sattn_ex[0][0]']
+
+ gap (GlobalAveragePooling2D)   (None, 48)           0           ['sattn_scale[0][0]']
+
+ fc1 (Dense)                    (None, 128)          6272        ['gap[0][0]']
+
+ act1 (Activation)              (None, 128)          0           ['fc1[0][0]']
+
+ drop1 (Dropout)                (None, 128)          0           ['act1[0][0]']
+
+ fc2 (Dense)                    (None, 64)           8256        ['drop1[0][0]']
+
+ act2 (Activation)              (None, 64)           0           ['fc2[0][0]']
+
+ drop2 (Dropout)                (None, 64)           0           ['act2[0][0]']
+
+ predictions (Dense)            (None, 5)            325         ['drop2[0][0]']
+
+==================================================================================================
+Total params: 374,785
+Trainable params: 374,529
+Non-trainable params: 256
+__________________________________________________________________________________________________
+
+[STEP 6/8] Compiling model...
+
+[STEP 7/8] Setting up callbacks...
+✓ Resuming from epoch 2, best val_auc_roc so far = 0.96651
+Epoch 3/60
+WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
+    with tf.GradientTape() as tape:
+      loss = loss_fn()
+      scaled_loss = opt.get_scaled_loss(loss)
+    scaled_grads = tape.gradient(scaled_loss, vars)
+    grads = opt.get_unscaled_gradients(scaled_grads)
+    opt.apply_gradients([(grads, var)])
+For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
+WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
+    with tf.GradientTape() as tape:
+      loss = loss_fn()
+      scaled_loss = opt.get_scaled_loss(loss)
+    scaled_grads = tape.gradient(scaled_loss, vars)
+    grads = opt.get_unscaled_gradients(scaled_grads)
+    opt.apply_gradients([(grads, var)])
+For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
+2026-04-03 12:39:11.127273: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8101
+2026-04-03 12:39:18.353217: I tensorflow/stream_executor/cuda/cuda_blas.cc:1614] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+     37/Unknown - 25s 273ms/step - loss: 0.4391 - accuracy: 0.6959 - top2_acc: 0.9122 - macro_f1: 0.6952 - auc_roc: 0.9375 - auc_pr: 0.7990      

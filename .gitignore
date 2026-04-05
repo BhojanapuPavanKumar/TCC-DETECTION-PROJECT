@@ -49,7 +49,8 @@ data/storm_tracks/
 data/prediction/
 data/metrics/
 data/samples/
-
+data/convlstm_dataset/
+data/convlstm_mc_dataset/
 # ================================
 # LSTM dataset — sequences only
 # Scalers and encoders ARE uploaded

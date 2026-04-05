@@ -165,7 +165,7 @@ def step5_run_pipeline_day():
 
     print(f"\n Step 5: Running full day pipeline for {DATE}...")
 
-    from src.dashboard.run_pipeline_day import main
+    from src.dashboard.cnnbigru.run_pipeline_day import main
     main()
 
 
@@ -199,7 +199,7 @@ def step8_build_actual():
 
     print("\n Step 8: Building actual behavior dashboard...")
 
-    from src.dashboard.build_actual_dashboard import main
+    from src.dashboard.cnnbigru.build_actual_dashboard import main
     main()
 
 
@@ -213,7 +213,7 @@ def step9_build_predicted():
 
     print("\n Step 9: Building predicted behavior dashboard...")
 
-    from src.dashboard.build_predicted_dashboard import main
+    from src.dashboard.cnnbigru.build_predicted_dashboard import main
     main()
 
 
@@ -227,7 +227,7 @@ def step10_export_results():
 
     print("\n Step 10: Exporting scientific JSON results...")
 
-    from src.dashboard.export_results import main
+    from src.dashboard.cnnbigru.export_results import main
     main()
 
 
