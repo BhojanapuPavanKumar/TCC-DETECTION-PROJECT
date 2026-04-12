@@ -1211,10 +1211,16 @@ project
 │   │   │       └── validation
 │   │   │           └── events.out.tfevents.1774955218.WIN-AGENT.12856.1.v2
 │   ├── convlstm_mc
-│   │   └── tensorboard
-│   │       └── 20260404-141643
-│   │           └── train
-│   │               └── events.out.tfevents.1775292404.WIN-AGENT.14544.0.v2
+│   │   ├── tensorboard
+│   │   │   ├── 20260404-141643
+│   │   │   │   └── train
+│   │   │   │       └── events.out.tfevents.1775292404.WIN-AGENT.14544.0.v2
+│   │   │   └── 20260409-170648
+│   │   │       ├── train
+│   │   │       │   └── events.out.tfevents.1775734610.WIN-AGENT.14676.0.v2
+│   │   │       └── validation
+│   │   │           └── events.out.tfevents.1775744937.WIN-AGENT.14676.1.v2
+│   │   ├── test_metrics_mc.json
 │   ├── gru_progress_summary.html
 │   ├── insat_cloud_monitor_summary.html
 │   ├── stage1_stage2_full_summary.html
@@ -1250,6 +1256,14 @@ project
 │   ├── convlstm
 │   │   └── best_convlstm.keras
 │   ├── convlstm_mc
+│   │   ├── best_convlstm_mc.keras
+│   │   │   ├── assets
+│   │   │   ├── keras_metadata.pb
+│   │   │   ├── saved_model.pb
+│   │   │   └── variables
+│   │   │       ├── variables.data-00000-of-00001
+│   │   │       └── variables.index
+│   │   └── best_convlstm_mc.keras.best_metric.txt
 │   ├── gru
 │   │   ├── storm_prediction_gru.keras
 │   │   ├── storm_prediction_gru_final.keras
@@ -1298,6 +1312,11 @@ project
 │   │   │   ├── y_pred_proba.npy
 │   │   │   └── y_true.npy
 │   │   └── convlstm_mc
+│   │       ├── confidence_distribution_mc.png
+│   │       ├── confusion_matrix_mc.png
+│   │       ├── gradcam_samples_mc.png
+│   │       ├── per_class_metrics_mc.png
+│   │       └── roc_pr_curves_mc.png
 │   ├── predicted
 │   │   └── predicted_2025-02-06.html
 │   ├── scientific
@@ -1330,8 +1349,10 @@ project
 │   │   │   ├── build_predicted_dashboard.py
 │   │   │   ├── export_results.py
 │   │   │   └── run_pipeline_day.py
-│   │   └── convlstm
-│   │       └── evaluate_convlstm.py
+│   │   ├── convlstm
+│   │   │   └── evaluate_convlstm.py
+│   │   └── convlstm_mc
+│   │       └── evaluate_convlstm_mc.py
 │   ├── dataset
 │   │   ├── cnn
 │   │   │   └── create_cnn_dataset.py

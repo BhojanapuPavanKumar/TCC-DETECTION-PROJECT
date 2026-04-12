@@ -96,8 +96,7 @@ epoch,accuracy,auc_pr,auc_roc,loss,macro_f1,top2_acc,val_accuracy,val_auc_pr,val
 
 
 
-
-py src/training/train_convlstm_mc.py
+py .\src\training\train_convlstm_mc.py
 ✓ GPU detected (1 device(s))
 [STEP 1/8] Loading data...
 Dataset loaded — X: (200000, 5, 64, 64, 1)  y: (200000,)
@@ -118,13 +117,13 @@ VRAM reduction from resize: 1.0×
   Class weights: {'NON-TCC': '1.000', 'ORGANIZING': '1.000', 'INTENSIFYING': '1.000', 'MATURE': '1.000', 'DISSIPATING': '1.000'}
 
 [STEP 4/8] Building tf.data generators...
-2026-04-03 12:39:01.458807: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+2026-04-09 17:06:48.869305: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2026-04-03 12:39:01.916725: I tensorflow/core/common_runtime/gpu/gpu_process_state.cc:222] Using CUDA malloc Async allocator for GPU: 0
-2026-04-03 12:39:01.917061: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1616] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1649 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2050, pci bus id: 0000:01:00.0, compute capability: 8.6
+2026-04-09 17:06:49.773165: I tensorflow/core/common_runtime/gpu/gpu_process_state.cc:222] Using CUDA malloc Async allocator for GPU: 0
+2026-04-09 17:06:49.774350: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1616] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1649 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2050, pci bus id: 0000:01:00.0, compute capability: 8.6
 
 [STEP 5/8] Building model...
-✓ Loading checkpoint — resuming training
+✓ Building new model
 Model: "ConvLSTM_MC_Residual_SE"
 __________________________________________________________________________________________________
  Layer (type)                   Output Shape         Param #     Connected to
@@ -197,24 +196,83 @@ ________________________________________________________________________________
 [STEP 6/8] Compiling model...
 
 [STEP 7/8] Setting up callbacks...
-✓ Resuming from epoch 2, best val_auc_roc so far = 0.96651
+Epoch 1/60
+WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
+    with tf.GradientTape() as tape:
+      loss = loss_fn()
+      scaled_loss = opt.get_scaled_loss(loss)
+    scaled_grads = tape.gradient(scaled_loss, vars)
+    grads = opt.get_unscaled_gradients(scaled_grads)
+    opt.apply_gradients([(grads, var)])
+For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
+WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
+    with tf.GradientTape() as tape:
+      loss = loss_fn()
+      scaled_loss = opt.get_scaled_loss(loss)
+    scaled_grads = tape.gradient(scaled_loss, vars)
+    grads = opt.get_unscaled_gradients(scaled_grads)
+    opt.apply_gradients([(grads, var)])
+For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
+2026-04-09 17:06:58.911036: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8101
+2026-04-09 17:07:06.830612: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:390] Filling up shuffle buffer (this may take a while): 964 of 2048
+2026-04-09 17:07:10.975111: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:415] Shuffle buffer filled.
+2026-04-09 17:07:11.880482: I tensorflow/stream_executor/cuda/cuda_blas.cc:1614] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+  35000/Unknown - 10325s 294ms/step - loss: 0.6402 - accuracy: 0.5768 - top2_acc: 0.7978 - macro_f1: 0.5740 - auc_roc: 0.8660 - auc_pr: 0.6653WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 1: val_auc_roc improved to 0.97051 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 11025s 314ms/step - loss: 0.6402 - accuracy: 0.5768 - top2_acc: 0.7978 - macro_f1: 0.5740 - auc_roc: 0.8660 - auc_pr: 0.6653 - val_loss: 0.3478 - val_accuracy: 0.8170 - val_top2_acc: 0.9735 - val_macro_f1: 0.8174 - val_auc_roc: 0.9705 - val_auc_pr: 0.8974 - lr: 4.0950e-05
+Epoch 2/60
+35000/35000 [==============================] - 10114s 289ms/step - loss: 0.3714 - accuracy: 0.7737 - top2_acc: 0.9570 - macro_f1: 0.7759 - auc_roc: 0.9575 - auc_pr: 0.8572 - val_loss: 0.3742 - val_accuracy: 0.7424 - val_top2_acc: 0.9522 - val_macro_f1: 0.7399 - val_auc_roc: 0.9517 - val_auc_pr: 0.8365 - lr: 8.0900e-05
 Epoch 3/60
-WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
-    with tf.GradientTape() as tape:
-      loss = loss_fn()
-      scaled_loss = opt.get_scaled_loss(loss)
-    scaled_grads = tape.gradient(scaled_loss, vars)
-    grads = opt.get_unscaled_gradients(scaled_grads)
-    opt.apply_gradients([(grads, var)])
-For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
-WARNING:tensorflow:You forgot to call LossScaleOptimizer.get_scaled_loss() and LossScaleOptimizer.get_unscaled_gradients() before calling LossScaleOptimizer.apply_gradients(). This will likely result in worse model quality, so please call them in the correct places! For example:
-    with tf.GradientTape() as tape:
-      loss = loss_fn()
-      scaled_loss = opt.get_scaled_loss(loss)
-    scaled_grads = tape.gradient(scaled_loss, vars)
-    grads = opt.get_unscaled_gradients(scaled_grads)
-    opt.apply_gradients([(grads, var)])
-For more information, see https://www.tensorflow.org/api_docs/python/tf/keras/mixed_precision/LossScaleOptimizer
-2026-04-03 12:39:11.127273: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8101
-2026-04-03 12:39:18.353217: I tensorflow/stream_executor/cuda/cuda_blas.cc:1614] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
-     37/Unknown - 25s 273ms/step - loss: 0.4391 - accuracy: 0.6959 - top2_acc: 0.9122 - macro_f1: 0.6952 - auc_roc: 0.9375 - auc_pr: 0.7990      
+35000/35000 [==============================] - ETA: 0s - loss: 0.3144 - accuracy: 0.8152 - top2_acc: 0.9735 - macro_f1: 0.8163 - auc_roc: 0.9698 - auc_pr: 0.8928WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 3: val_auc_roc improved to 0.97744 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 10086s 288ms/step - loss: 0.3144 - accuracy: 0.8152 - top2_acc: 0.9735 - macro_f1: 0.8163 - auc_roc: 0.9698 - auc_pr: 0.8928 - val_loss: 0.2803 - val_accuracy: 0.8357 - val_top2_acc: 0.9796 - val_macro_f1: 0.8359 - val_auc_roc: 0.9774 - val_auc_pr: 0.9207 - lr: 1.2085e-04
+Epoch 4/60
+35000/35000 [==============================] - 10088s 288ms/step - loss: 0.2956 - accuracy: 0.8275 - top2_acc: 0.9767 - macro_f1: 0.8282 - auc_roc: 0.9733 - auc_pr: 0.9043 - val_loss: 0.2817 - val_accuracy: 0.8172 - val_top2_acc: 0.9798 - val_macro_f1: 0.8167 - val_auc_roc: 0.9750 - val_auc_pr: 0.9112 - lr: 1.6080e-04
+Epoch 5/60
+35000/35000 [==============================] - 10097s 288ms/step - loss: 0.2846 - accuracy: 0.8335 - top2_acc: 0.9790 - macro_f1: 0.8340 - auc_roc: 0.9752 - auc_pr: 0.9111 - val_loss: 0.2950 - val_accuracy: 0.8150 - val_top2_acc: 0.9748 - val_macro_f1: 0.8138 - val_auc_roc: 0.9711 - val_auc_pr: 0.8984 - lr: 2.0075e-04
+Epoch 6/60
+35000/35000 [==============================] - ETA: 0s - loss: 0.2752 - accuracy: 0.8386 - top2_acc: 0.9804 - macro_f1: 0.8391 - auc_roc: 0.9767 - auc_pr: 0.9163WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 6: val_auc_roc improved to 0.98214 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 10138s 289ms/step - loss: 0.2752 - accuracy: 0.8386 - top2_acc: 0.9804 - macro_f1: 0.8391 - auc_roc: 0.9767 - auc_pr: 0.9163 - val_loss: 0.2492 - val_accuracy: 0.8520 - val_top2_acc: 0.9876 - val_macro_f1: 0.8527 - val_auc_roc: 0.9821 - val_auc_pr: 0.9355 - lr: 2.4070e-04
+Epoch 7/60
+35000/35000 [==============================] - 10157s 290ms/step - loss: 0.2717 - accuracy: 0.8394 - top2_acc: 0.9804 - macro_f1: 0.8399 - auc_roc: 0.9769 - auc_pr: 0.9176 - val_loss: 0.2500 - val_accuracy: 0.8554 - val_top2_acc: 0.9833 - val_macro_f1: 0.8563 - val_auc_roc: 0.9815 - val_auc_pr: 0.9340 - lr: 2.8065e-04
+Epoch 8/60
+35000/35000 [==============================] - 10118s 289ms/step - loss: 0.2666 - accuracy: 0.8421 - top2_acc: 0.9814 - macro_f1: 0.8427 - auc_roc: 0.9776 - auc_pr: 0.9199 - val_loss: 0.2488 - val_accuracy: 0.8483 - val_top2_acc: 0.9884 - val_macro_f1: 0.8489 - val_auc_roc: 0.9815 - val_auc_pr: 0.9325 - lr: 3.2060e-04
+Epoch 9/60
+35000/35000 [==============================] - 10125s 289ms/step - loss: 0.2690 - accuracy: 0.8356 - top2_acc: 0.9803 - macro_f1: 0.8364 - auc_roc: 0.9765 - auc_pr: 0.9168 - val_loss: 0.2537 - val_accuracy: 0.8482 - val_top2_acc: 0.9844 - val_macro_f1: 0.8474 - val_auc_roc: 0.9804 - val_auc_pr: 0.9293 - lr: 3.6055e-04
+Epoch 10/60
+35000/35000 [==============================] - 10133s 289ms/step - loss: 0.2721 - accuracy: 0.8347 - top2_acc: 0.9788 - macro_f1: 0.8354 - auc_roc: 0.9756 - auc_pr: 0.9139 - val_loss: 0.2587 - val_accuracy: 0.8460 - val_top2_acc: 0.9799 - val_macro_f1: 0.8466 - val_auc_roc: 0.9787 - val_auc_pr: 0.9271 - lr: 4.0050e-04
+Epoch 11/60
+35000/35000 [==============================] - 10131s 289ms/step - loss: 0.2659 - accuracy: 0.8363 - top2_acc: 0.9808 - macro_f1: 0.8370 - auc_roc: 0.9769 - auc_pr: 0.9188 - val_loss: 0.2608 - val_accuracy: 0.8438 - val_top2_acc: 0.9810 - val_macro_f1: 0.8443 - val_auc_roc: 0.9781 - val_auc_pr: 0.9247 - lr: 4.4045e-04
+Epoch 12/60
+35000/35000 [==============================] - 10126s 289ms/step - loss: 0.2649 - accuracy: 0.8394 - top2_acc: 0.9810 - macro_f1: 0.8401 - auc_roc: 0.9770 - auc_pr: 0.9189 - val_loss: 0.2552 - val_accuracy: 0.8458 - val_top2_acc: 0.9810 - val_macro_f1: 0.8456 - val_auc_roc: 0.9794 - val_auc_pr: 0.9288 - lr: 4.8040e-04
+Epoch 13/60
+35000/35000 [==============================] - ETA: 0s - loss: 0.2624 - accuracy: 0.8411 - top2_acc: 0.9818 - macro_f1: 0.8418 - auc_roc: 0.9776 - auc_pr: 0.9209WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 13: val_auc_roc improved to 0.98360 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 10138s 289ms/step - loss: 0.2624 - accuracy: 0.8411 - top2_acc: 0.9818 - macro_f1: 0.8418 - auc_roc: 0.9776 - auc_pr: 0.9209 - val_loss: 0.2362 - val_accuracy: 0.8605 - val_top2_acc: 0.9873 - val_macro_f1: 0.8611 - val_auc_roc: 0.9836 - val_auc_pr: 0.9420 - lr: 5.2035e-04
+Epoch 14/60
+35000/35000 [==============================] - 10133s 289ms/step - loss: 0.2612 - accuracy: 0.8411 - top2_acc: 0.9817 - macro_f1: 0.8418 - auc_roc: 0.9778 - auc_pr: 0.9215 - val_loss: 0.2514 - val_accuracy: 0.8411 - val_top2_acc: 0.9860 - val_macro_f1: 0.8397 - val_auc_roc: 0.9792 - val_auc_pr: 0.9247 - lr: 5.6030e-04
+Epoch 15/60
+35000/35000 [==============================] - 10199s 291ms/step - loss: 0.2621 - accuracy: 0.8398 - top2_acc: 0.9821 - macro_f1: 0.8407 - auc_roc: 0.9775 - auc_pr: 0.9206 - val_loss: 0.3136 - val_accuracy: 0.7877 - val_top2_acc: 0.9644 - val_macro_f1: 0.7872 - val_auc_roc: 0.9639 - val_auc_pr: 0.8843 - lr: 6.0025e-04
+Epoch 16/60
+35000/35000 [==============================] - ETA: 0s - loss: 0.2598 - accuracy: 0.8423 - top2_acc: 0.9824 - macro_f1: 0.8431 - auc_roc: 0.9781 - auc_pr: 0.9220WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 16: val_auc_roc improved to 0.98446 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 10408s 297ms/step - loss: 0.2598 - accuracy: 0.8423 - top2_acc: 0.9824 - macro_f1: 0.8431 - auc_roc: 0.9781 - auc_pr: 0.9220 - val_loss: 0.2308 - val_accuracy: 0.8608 - val_top2_acc: 0.9897 - val_macro_f1: 0.8613 - val_auc_roc: 0.9845 - val_auc_pr: 0.9443 - lr: 6.4020e-04
+Epoch 17/60
+35000/35000 [==============================] - 10430s 298ms/step - loss: 0.2579 - accuracy: 0.8436 - top2_acc: 0.9833 - macro_f1: 0.8443 - auc_roc: 0.9785 - auc_pr: 0.9233 - val_loss: 0.2338 - val_accuracy: 0.8686 - val_top2_acc: 0.9875 - val_macro_f1: 0.8687 - val_auc_roc: 0.9844 - val_auc_pr: 0.9443 - lr: 6.8015e-04
+Epoch 18/60
+35000/35000 [==============================] - 10152s 290ms/step - loss: 0.2589 - accuracy: 0.8427 - top2_acc: 0.9833 - macro_f1: 0.8434 - auc_roc: 0.9782 - auc_pr: 0.9225 - val_loss: 0.2549 - val_accuracy: 0.8503 - val_top2_acc: 0.9823 - val_macro_f1: 0.8521 - val_auc_roc: 0.9786 - val_auc_pr: 0.9273 - lr: 7.2010e-04
+Epoch 19/60
+35000/35000 [==============================] - 10168s 290ms/step - loss: 0.2615 - accuracy: 0.8407 - top2_acc: 0.9816 - macro_f1: 0.8415 - auc_roc: 0.9776 - auc_pr: 0.9210 - val_loss: 0.2597 - val_accuracy: 0.8338 - val_top2_acc: 0.9813 - val_macro_f1: 0.8350 - val_auc_roc: 0.9775 - val_auc_pr: 0.9231 - lr: 7.6005e-04
+Epoch 20/60
+35000/35000 [==============================] - 10155s 290ms/step - loss: 0.2607 - accuracy: 0.8407 - top2_acc: 0.9822 - macro_f1: 0.8416 - auc_roc: 0.9778 - auc_pr: 0.9216 - val_loss: 0.2408 - val_accuracy: 0.8576 - val_top2_acc: 0.9852 - val_macro_f1: 0.8573 - val_auc_roc: 0.9825 - val_auc_pr: 0.9391 - lr: 8.0000e-04
+Epoch 21/60
+35000/35000 [==============================] - ETA: 0s - loss: 0.2631 - accuracy: 0.8400 - top2_acc: 0.9813 - macro_f1: 0.8408 - auc_roc: 0.9774 - auc_pr: 0.9203WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+Epoch 21: val_auc_roc improved to 0.98535 → saved models/convlstm_mc\best_convlstm_mc.keras
+35000/35000 [==============================] - 10160s 290ms/step - loss: 0.2631 - accuracy: 0.8400 - top2_acc: 0.9813 - macro_f1: 0.8408 - auc_roc: 0.9774 - auc_pr: 0.9203 - val_loss: 0.2293 - val_accuracy: 0.8699 - val_top2_acc: 0.9896 - val_macro_f1: 0.8708 - val_auc_roc: 0.9854 - val_auc_pr: 0.9466 - lr: 7.9996e-04
