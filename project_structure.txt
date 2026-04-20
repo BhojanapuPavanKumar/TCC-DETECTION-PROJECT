@@ -1301,14 +1301,18 @@ project
 │   │   │   ├── plots
 │   │   │   │   ├── auc_progression.png
 │   │   │   │   ├── combined_summary.png
+│   │   │   │   ├── confidence_distribution.png
 │   │   │   │   ├── confusion_matrix.png
 │   │   │   │   ├── generalization_gap.png
+│   │   │   │   ├── gradcam_samples.png
 │   │   │   │   ├── learning_curves.png
+│   │   │   │   ├── per_class_metrics.png
 │   │   │   │   ├── roc_pr_curves.png
 │   │   │   │   └── training_stability.png
 │   │   │   ├── reports
 │   │   │   │   ├── scientific_report.json
-│   │   │   │   └── stats_table.tex
+│   │   │   │   ├── stats_table.tex
+│   │   │   │   └── test_metrics.json
 │   │   │   ├── y_pred_proba.npy
 │   │   │   └── y_true.npy
 │   │   └── convlstm_mc

@@ -1,0 +1,256 @@
+{
+  "paper_metadata": {
+    "title": "INSAT-3D Cold Cloud Cluster Monitoring using BiGRU+Attention",
+    "date": "2025-02-06",
+    "system": "INSAT-3D TIR1 Channel (10.8 \u03bcm)",
+    "region": "Indian Ocean (40-120E, -60-60N)",
+    "interval": "30 minutes",
+    "generated": "2026-03-28T12:21:26.228450"
+  },
+  "day_results": {
+    "date": "2025-02-06",
+    "n_clusters_total": 1519,
+    "n_clusters_predicted": 196,
+    "total_predictions": 1768,
+    "overall_accuracy": 0.7098,
+    "event_recall": 0.6316,
+    "events_found": 12,
+    "events_true": 19,
+    "class_accuracy": {
+      "NORMAL": 0.7136,
+      "ORGANIZING": 0.1429,
+      "INTENSIFYING": 0.5
+    },
+    "class_sample_counts": {
+      "NORMAL": 1749,
+      "ORGANIZING": 7,
+      "INTENSIFYING": 12
+    },
+    "behavior_distribution": {
+      "STABLE": 1245,
+      "SHRINKING": 343,
+      "GROWING": 161,
+      "INTENSIFYING": 12,
+      "SPLITTING": 4,
+      "MERGING": 3
+    }
+  },
+  "top_clusters": [
+    {
+      "cluster_id": 54994,
+      "lat_mean": -33.271,
+      "lon_mean": 61.013,
+      "time_start": "2025-02-06 01:15:00",
+      "time_end": "2025-02-06 11:15:00",
+      "n_frames": 27,
+      "accuracy": 0.5263,
+      "event_recall": 0.0,
+      "true_behaviors": {
+        "STABLE": 9,
+        "GROWING": 2,
+        "SPLITTING": 3,
+        "SHRINKING": 4,
+        "MERGING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 14,
+        "ORGANIZING": 5
+      }
+    },
+    {
+      "cluster_id": 55586,
+      "lat_mean": -24.815,
+      "lon_mean": 25.489,
+      "time_start": "2025-02-06 11:45:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 16,
+      "accuracy": 0.375,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 5,
+        "INTENSIFYING": 2,
+        "GROWING": 1
+      },
+      "pred_classes": {
+        "INTENSIFYING": 7,
+        "NORMAL": 1
+      }
+    },
+    {
+      "cluster_id": 56052,
+      "lat_mean": -10.579,
+      "lon_mean": 91.912,
+      "time_start": "2025-02-06 19:45:00",
+      "time_end": "2025-02-06 23:45:00",
+      "n_frames": 10,
+      "accuracy": 0.5,
+      "event_recall": 0.5,
+      "true_behaviors": {
+        "SPLITTING": 1,
+        "MERGING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 1,
+        "ORGANIZING": 1
+      }
+    },
+    {
+      "cluster_id": 54099,
+      "lat_mean": -9.189,
+      "lon_mean": 56.161,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 19:45:00",
+      "n_frames": 83,
+      "accuracy": 0.2133,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "SHRINKING": 17,
+        "GROWING": 6,
+        "STABLE": 51,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 58,
+        "NORMAL": 16,
+        "INTENSIFYING": 1
+      }
+    },
+    {
+      "cluster_id": 54754,
+      "lat_mean": 7.15,
+      "lon_mean": 60.585,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 08:15:00",
+      "n_frames": 28,
+      "accuracy": 0.65,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 13,
+        "GROWING": 4,
+        "INTENSIFYING": 1,
+        "SHRINKING": 2
+      },
+      "pred_classes": {
+        "ORGANIZING": 7,
+        "NORMAL": 13
+      }
+    },
+    {
+      "cluster_id": 54798,
+      "lat_mean": -10.88,
+      "lon_mean": 52.628,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 23:45:00",
+      "n_frames": 83,
+      "accuracy": 0.1333,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "GROWING": 12,
+        "STABLE": 50,
+        "SHRINKING": 12,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 35,
+        "INTENSIFYING": 31,
+        "NORMAL": 9
+      }
+    },
+    {
+      "cluster_id": 55228,
+      "lat_mean": -7.318,
+      "lon_mean": 35.102,
+      "time_start": "2025-02-06 05:15:00",
+      "time_end": "2025-02-06 10:45:00",
+      "n_frames": 12,
+      "accuracy": 0.75,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 3,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 2,
+        "INTENSIFYING": 2
+      }
+    },
+    {
+      "cluster_id": 55444,
+      "lat_mean": 2.528,
+      "lon_mean": 97.982,
+      "time_start": "2025-02-06 09:45:00",
+      "time_end": "2025-02-06 14:45:00",
+      "n_frames": 12,
+      "accuracy": 0.0,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "GROWING": 2,
+        "INTENSIFYING": 1,
+        "SHRINKING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 4
+      }
+    },
+    {
+      "cluster_id": 55536,
+      "lat_mean": -11.867,
+      "lon_mean": 35.54,
+      "time_start": "2025-02-06 11:15:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 23,
+      "accuracy": 0.1333,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 7,
+        "SHRINKING": 5,
+        "GROWING": 2,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 1,
+        "INTENSIFYING": 13,
+        "NORMAL": 1
+      }
+    },
+    {
+      "cluster_id": 55601,
+      "lat_mean": -2.086,
+      "lon_mean": 131.049,
+      "time_start": "2025-02-06 12:15:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 13,
+      "accuracy": 0.6,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "SHRINKING": 1,
+        "GROWING": 1,
+        "STABLE": 2,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 3,
+        "ORGANIZING": 1,
+        "INTENSIFYING": 1
+      }
+    }
+  ],
+  "case_study_cluster_50526_summary": {
+    "cluster_id": 50526,
+    "description": "Best validation cluster \u2014 automatically selected",
+    "lat_mean": -19.549,
+    "lon_mean": 81.768,
+    "time_start": "2025-02-06 00:15:00",
+    "time_end": "2025-02-06 23:45:00",
+    "n_frames": 45,
+    "accuracy": 0.8919,
+    "event_recall": null,
+    "true_behaviors": {
+      "STABLE": 37
+    },
+    "pred_classes": {
+      "NORMAL": 33,
+      "INTENSIFYING": 4
+    }
+  }
+}

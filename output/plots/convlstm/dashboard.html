@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ConvLSTM Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:24px}
+h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.sub{font-size:13px;color:#666;margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.card{background:#fff;border-radius:10px;padding:16px 18px;border:0.5px solid #e0dfd8}
+.card .val{font-size:22px;font-weight:600;margin-top:4px;color:#3266AD}
+.card .lbl{font-size:12px;color:#888}
+.card .sub2{font-size:11px;color:#aaa;margin-top:3px}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tab{background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:7px 16px;
+      font-size:13px;cursor:pointer;color:#555;transition:all 0.15s}
+.tab.active{background:#3266AD;color:#fff;border-color:#3266AD}
+.panel{display:none}.panel.active{display:block}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cbox{background:#fff;border-radius:10px;padding:16px;border:0.5px solid #e0dfd8}
+.cbox h3{font-size:13px;font-weight:600;margin-bottom:10px;color:#333}
+.cwrap{position:relative;height:220px}
+.legend{display:flex;gap:16px;margin-top:8px;font-size:11px;color:#666}
+.legend span{display:flex;align-items:center;gap:5px}
+.dot{width:14px;height:3px;border-radius:2px;display:inline-block}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+th{background:#3266AD;color:#fff;padding:8px 12px;text-align:left;font-weight:500}
+td{padding:7px 12px;border-bottom:0.5px solid #eee}
+tr:nth-child(even) td{background:#f8f8f6}
+.sblock{background:#fff;border-radius:10px;padding:16px;border:0.5px solid #e0dfd8;margin-top:12px}
+.srow{display:flex;justify-content:space-between;padding:6px 0;
+       border-bottom:0.5px solid #f0f0f0;font-size:13px}
+.srow:last-child{border-bottom:none}
+.sl{color:#888}.sv{font-weight:500}
+@media(max-width:720px){.cards,.chart-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>ConvLSTM &mdash; Scientific Evaluation Dashboard</h1>
+<p class="sub">Generated: 2026-04-01 22:29 &nbsp;|&nbsp; 19 epochs</p>
+
+<div class="cards">
+  <div class="card"><div class="lbl">Best val accuracy</div>
+    <div class="val">98.13%</div><div class="sub2">Epoch 16</div></div>
+  <div class="card"><div class="lbl">Mean val AUC-ROC</div>
+    <div class="val">0.9945</div><div class="sub2">across all epochs</div></div>
+  <div class="card"><div class="lbl">Overfitting index</div>
+    <div class="val">0.0013</div><div class="sub2">mean train-val gap</div></div>
+  <div class="card"><div class="lbl">Convergence epoch</div>
+    <div class="val">18</div><div class="sub2">loss &lt; 1% of initial</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('curves',this)">Learning curves</button>
+  <button class="tab" onclick="show('auc',this)">AUC progression</button>
+  <button class="tab" onclick="show('gap',this)">Generalization</button>
+  <button class="tab" onclick="show('summary',this)">Statistics</button>
+</div>
+
+<div id="p-curves" class="panel active">
+  <div class="chart-grid">
+    <div class="cbox"><h3>Accuracy</h3><div class="cwrap"><canvas id="accC"></canvas></div></div>
+    <div class="cbox"><h3>Loss</h3><div class="cwrap"><canvas id="lossC"></canvas></div></div>
+  </div>
+  <div class="legend" style="margin-top:10px;">
+    <span><span class="dot" style="background:#3266AD"></span>Train</span>
+    <span><span class="dot" style="background:#E24B4A"></span>Validation</span>
+    <span><span class="dot" style="background:#1D9E75"></span>Best epoch 16</span>
+  </div>
+</div>
+
+<div id="p-auc" class="panel">
+  <div class="cbox"><h3>Validation AUC-ROC and AUC-PR across epochs</h3>
+    <div class="cwrap" style="height:280px;"><canvas id="aucC"></canvas></div></div>
+  <div class="legend" style="margin-top:10px;">
+    <span><span class="dot" style="background:#534AB7"></span>AUC-ROC</span>
+    <span><span class="dot" style="background:#D85A30"></span>AUC-PR</span>
+  </div>
+</div>
+
+<div id="p-gap" class="panel">
+  <div class="cbox"><h3>Per-epoch generalization gap (train - val accuracy)</h3>
+    <div class="cwrap"><canvas id="gapC"></canvas></div></div>
+  <div class="sblock">
+    <div class="srow"><span class="sl">Mean gap</span>
+      <span class="sv">0.1316%</span></div>
+    <div class="srow"><span class="sl">Max gap</span>
+      <span class="sv">2.291% (epoch 10)</span></div>
+    <div class="srow"><span class="sl">Overfitting status</span>
+      <span class="sv" style="color:#1D9E75;">Minimal</span></div>
+  </div>
+</div>
+
+<div id="p-summary" class="panel">
+  <div class="chart-grid">
+    <div class="sblock"><strong>Training</strong>
+      <div class="srow"><span class="sl">Accuracy mean</span><span class="sv">96.704%</span></div>
+      <div class="srow"><span class="sl">AUC-ROC mean</span>
+        <span class="sv">0.9946</span></div>
+      <div class="srow"><span class="sl">Loss reduction</span><span class="sv">81.6%</span></div>
+    </div>
+    <div class="sblock"><strong>Validation</strong>
+      <div class="srow"><span class="sl">Accuracy mean</span><span class="sv">96.573%</span></div>
+      <div class="srow"><span class="sl">AUC-ROC mean</span><span class="sv">0.9945</span></div>
+      <div class="srow"><span class="sl">Loss reduction</span><span class="sv">73.2%</span></div>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Metric</th><th>Train mean+/-std</th><th>Val mean+/-std</th>
+      <th>Val best</th><th>Gap mean</th><th>Cohen d</th></tr></thead>
+    <tbody><tr><td>Accuracy</td><td>0.9670 &plusmn; 0.0185</td><td>0.9657 &plusmn; 0.0099</td><td>0.9813</td><td>0.0013</td><td>0.086</td></tr>
+<tr><td>Auc Roc</td><td>0.9946 &plusmn; 0.0081</td><td>0.9945 &plusmn; 0.0033</td><td>0.9986</td><td>0.0001</td><td>0.019</td></tr>
+<tr><td>Auc Pr</td><td>0.9946 &plusmn; 0.0080</td><td>0.9944 &plusmn; 0.0035</td><td>0.9986</td><td>0.0003</td><td>0.042</td></tr>
+<tr><td>Loss</td><td>0.0273 &plusmn; 0.0163</td><td>0.0311 &plusmn; 0.0138</td><td>0.0141</td><td>-0.0038</td><td>-0.244</td></tr>
+<tr><td>F1 Score</td><td>0.9670 &plusmn; 0.0185</td><td>0.9657 &plusmn; 0.0099</td><td>0.9813</td><td>0.0013</td><td>0.086</td></tr>
+</tbody>
+  </table>
+</div>
+
+<script>
+const ep=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],trA=[0.893716, 0.954184, 0.959061, 0.964237, 0.965777, 0.966183, 0.968557, 0.97014, 0.972236, 0.972301, 0.974183, 0.974226, 0.975252, 0.976087, 0.977006, 0.978311, 0.977284, 0.977883, 0.97722],vaA=[0.951278, 0.964457, 0.960463, 0.955272, 0.949481, 0.965555, 0.95597, 0.974641, 0.960663, 0.970048, 0.951278, 0.961462, 0.97494, 0.97504, 0.967352, 0.973442, 0.98133, 0.975339, 0.980831],trL=[0.084203, 0.048335, 0.041341, 0.03612, 0.03295, 0.030416, 0.026642, 0.023764, 0.021831, 0.020945, 0.019279, 0.018728, 0.017598, 0.017287, 0.016691, 0.015934, 0.015941, 0.015597, 0.015502],vaL=[0.054546, 0.057091, 0.045495, 0.045178, 0.051463, 0.029559, 0.031827, 0.022581, 0.036125, 0.023396, 0.039781, 0.030218, 0.018196, 0.016986, 0.025411, 0.018106, 0.014077, 0.016509, 0.014611];
+const vaR=[0.991849, 0.988224, 0.990612, 0.989244, 0.989636, 0.995685, 0.993805, 0.996928, 0.993293, 0.996085, 0.992014, 0.993883, 0.997689, 0.997934, 0.996342, 0.997524, 0.998554, 0.998012, 0.998412],vaP=[0.991918, 0.988023, 0.988618, 0.98935, 0.989156, 0.995626, 0.993374, 0.996953, 0.993025, 0.996147, 0.992127, 0.993997, 0.997735, 0.997966, 0.996431, 0.997419, 0.99856, 0.998044, 0.998336],gapD=[-5.7562, -1.0273, -0.1403, 0.8965, 1.6296, 0.0628, 1.2587, -0.45, 1.1573, 0.2253, 2.2905, 1.2764, 0.0312, 0.1047, 0.9654, 0.4869, -0.4045, 0.2544, -0.361],bestEp=16;
+
+const bestLine={id:'best',afterDraw(c){
+  const xi=c.scales.x.getPixelForValue(bestEp),ctx=c.ctx;
+  const t=c.chartArea.top,b=c.chartArea.bottom;
+  ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle='#1D9E75';
+  ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(xi,t);ctx.lineTo(xi,b);
+  ctx.stroke();ctx.restore();
+}};
+
+function mkLine(id,datasets,yMin,yMax,fmt){
+  return new Chart(document.getElementById(id),{
+    type:'line',data:{labels:ep,datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+      scales:{
+        x:{ticks:{font:{size:10},color:'#999',maxTicksLimit:10},grid:{color:'rgba(0,0,0,0.04)'}},
+        y:{min:yMin,max:yMax,
+          ticks:{font:{size:10},color:'#999',callback:v=>typeof fmt==='function'?fmt(v):v.toFixed(3)},
+          grid:{color:'rgba(0,0,0,0.04)'}}
+      },elements:{point:{radius:2,hoverRadius:4},line:{tension:0.35,borderWidth:2}}
+    },plugins:[bestLine]
+  });
+}
+
+mkLine('accC',[
+  {data:trA,borderColor:'#3266AD',backgroundColor:'rgba(50,102,173,0.06)',fill:true,label:'Train'},
+  {data:vaA,borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.06)',fill:true,label:'Val'}
+],0.87,1.002);
+mkLine('lossC',[
+  {data:trL,borderColor:'#3266AD',label:'Train'},
+  {data:vaL,borderColor:'#E24B4A',label:'Val'}
+],null,null);
+mkLine('aucC',[
+  {data:vaR,borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,0.06)',fill:true,label:'AUC-ROC'},
+  {data:vaP,borderColor:'#D85A30',borderDash:[4,3],label:'AUC-PR'}
+],0.98,1.001,v=>v.toFixed(4));
+
+const gapColors=gapD.map(v=>v>=0?'rgba(50,102,173,0.65)':'rgba(226,75,74,0.65)');
+new Chart(document.getElementById('gapC'),{
+  type:'bar',data:{labels:ep,datasets:[{data:gapD,backgroundColor:gapColors,borderRadius:4,label:'Gap'}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(4)+'%'}}},
+    scales:{
+      x:{ticks:{font:{size:10},color:'#999'},grid:{display:false}},
+      y:{ticks:{font:{size:10},color:'#999',callback:v=>v.toFixed(2)+'%'},grid:{color:'rgba(0,0,0,0.04)'}}
+    }
+  }
+});
+
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body></html>

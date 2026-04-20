@@ -1,0 +1,739 @@
+{
+  "paper_metadata": {
+    "title": "INSAT-3D Cold Cloud Cluster Monitoring using BiGRU+Attention",
+    "date": "2025-02-06",
+    "system": "INSAT-3D TIR1 Channel (10.8 \u03bcm)",
+    "region": "Indian Ocean (40-120E, -60-60N)",
+    "interval": "30 minutes",
+    "generated": "2026-03-28T12:21:26.228450"
+  },
+  "day_results": {
+    "date": "2025-02-06",
+    "n_clusters_total": 1519,
+    "n_clusters_predicted": 196,
+    "total_predictions": 1768,
+    "overall_accuracy": 0.7098,
+    "event_recall": 0.6316,
+    "events_found": 12,
+    "events_true": 19,
+    "class_accuracy": {
+      "NORMAL": 0.7136,
+      "ORGANIZING": 0.1429,
+      "INTENSIFYING": 0.5
+    },
+    "class_sample_counts": {
+      "NORMAL": 1749,
+      "ORGANIZING": 7,
+      "INTENSIFYING": 12
+    },
+    "behavior_distribution": {
+      "STABLE": 1245,
+      "SHRINKING": 343,
+      "GROWING": 161,
+      "INTENSIFYING": 12,
+      "SPLITTING": 4,
+      "MERGING": 3
+    }
+  },
+  "top_clusters": [
+    {
+      "cluster_id": 54994,
+      "lat_mean": -33.271,
+      "lon_mean": 61.013,
+      "time_start": "2025-02-06 01:15:00",
+      "time_end": "2025-02-06 11:15:00",
+      "n_frames": 27,
+      "accuracy": 0.5263,
+      "event_recall": 0.0,
+      "true_behaviors": {
+        "STABLE": 9,
+        "GROWING": 2,
+        "SPLITTING": 3,
+        "SHRINKING": 4,
+        "MERGING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 14,
+        "ORGANIZING": 5
+      }
+    },
+    {
+      "cluster_id": 55586,
+      "lat_mean": -24.815,
+      "lon_mean": 25.489,
+      "time_start": "2025-02-06 11:45:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 16,
+      "accuracy": 0.375,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 5,
+        "INTENSIFYING": 2,
+        "GROWING": 1
+      },
+      "pred_classes": {
+        "INTENSIFYING": 7,
+        "NORMAL": 1
+      }
+    },
+    {
+      "cluster_id": 56052,
+      "lat_mean": -10.579,
+      "lon_mean": 91.912,
+      "time_start": "2025-02-06 19:45:00",
+      "time_end": "2025-02-06 23:45:00",
+      "n_frames": 10,
+      "accuracy": 0.5,
+      "event_recall": 0.5,
+      "true_behaviors": {
+        "SPLITTING": 1,
+        "MERGING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 1,
+        "ORGANIZING": 1
+      }
+    },
+    {
+      "cluster_id": 54099,
+      "lat_mean": -9.189,
+      "lon_mean": 56.161,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 19:45:00",
+      "n_frames": 83,
+      "accuracy": 0.2133,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "SHRINKING": 17,
+        "GROWING": 6,
+        "STABLE": 51,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 58,
+        "NORMAL": 16,
+        "INTENSIFYING": 1
+      }
+    },
+    {
+      "cluster_id": 54754,
+      "lat_mean": 7.15,
+      "lon_mean": 60.585,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 08:15:00",
+      "n_frames": 28,
+      "accuracy": 0.65,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 13,
+        "GROWING": 4,
+        "INTENSIFYING": 1,
+        "SHRINKING": 2
+      },
+      "pred_classes": {
+        "ORGANIZING": 7,
+        "NORMAL": 13
+      }
+    },
+    {
+      "cluster_id": 54798,
+      "lat_mean": -10.88,
+      "lon_mean": 52.628,
+      "time_start": "2025-02-06 00:15:00",
+      "time_end": "2025-02-06 23:45:00",
+      "n_frames": 83,
+      "accuracy": 0.1333,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "GROWING": 12,
+        "STABLE": 50,
+        "SHRINKING": 12,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 35,
+        "INTENSIFYING": 31,
+        "NORMAL": 9
+      }
+    },
+    {
+      "cluster_id": 55228,
+      "lat_mean": -7.318,
+      "lon_mean": 35.102,
+      "time_start": "2025-02-06 05:15:00",
+      "time_end": "2025-02-06 10:45:00",
+      "n_frames": 12,
+      "accuracy": 0.75,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 3,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 2,
+        "INTENSIFYING": 2
+      }
+    },
+    {
+      "cluster_id": 55444,
+      "lat_mean": 2.528,
+      "lon_mean": 97.982,
+      "time_start": "2025-02-06 09:45:00",
+      "time_end": "2025-02-06 14:45:00",
+      "n_frames": 12,
+      "accuracy": 0.0,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "GROWING": 2,
+        "INTENSIFYING": 1,
+        "SHRINKING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 4
+      }
+    },
+    {
+      "cluster_id": 55536,
+      "lat_mean": -11.867,
+      "lon_mean": 35.54,
+      "time_start": "2025-02-06 11:15:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 23,
+      "accuracy": 0.1333,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "STABLE": 7,
+        "SHRINKING": 5,
+        "GROWING": 2,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "ORGANIZING": 1,
+        "INTENSIFYING": 13,
+        "NORMAL": 1
+      }
+    },
+    {
+      "cluster_id": 55601,
+      "lat_mean": -2.086,
+      "lon_mean": 131.049,
+      "time_start": "2025-02-06 12:15:00",
+      "time_end": "2025-02-06 17:45:00",
+      "n_frames": 13,
+      "accuracy": 0.6,
+      "event_recall": 1.0,
+      "true_behaviors": {
+        "SHRINKING": 1,
+        "GROWING": 1,
+        "STABLE": 2,
+        "INTENSIFYING": 1
+      },
+      "pred_classes": {
+        "NORMAL": 3,
+        "ORGANIZING": 1,
+        "INTENSIFYING": 1
+      }
+    }
+  ],
+  "case_study_cluster_50526": {
+    "cluster_id": 50526,
+    "description": "Best validation cluster \u2014 automatically selected",
+    "lat_mean": -19.549,
+    "lon_mean": 81.768,
+    "time_start": "2025-02-06 00:15:00",
+    "time_end": "2025-02-06 23:45:00",
+    "n_frames": 45,
+    "accuracy": 0.8919,
+    "event_recall": null,
+    "true_behaviors": {
+      "STABLE": 37
+    },
+    "pred_classes": {
+      "NORMAL": 33,
+      "INTENSIFYING": 4
+    },
+    "per_step": [
+      {
+        "time": "2025-02-06 04:15:00",
+        "lat": -19.03,
+        "lon": 82.77,
+        "area_km2": 28644.0,
+        "mean_tb": 215.62,
+        "conv_core": 0.4367,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2122,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 04:45:00",
+        "lat": -19.23,
+        "lon": 82.83,
+        "area_km2": 24384.0,
+        "mean_tb": 211.82,
+        "conv_core": 0.5815,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.3676,
+        "pred_final": "INTENSIFYING",
+        "correct": false
+      },
+      {
+        "time": "2025-02-06 05:15:00",
+        "lat": -19.19,
+        "lon": 82.71,
+        "area_km2": 26124.0,
+        "mean_tb": 211.99,
+        "conv_core": 0.5423,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.4251,
+        "pred_final": "INTENSIFYING",
+        "correct": false
+      },
+      {
+        "time": "2025-02-06 05:45:00",
+        "lat": -19.19,
+        "lon": 82.59,
+        "area_km2": 28164.0,
+        "mean_tb": 212.0,
+        "conv_core": 0.5332,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2786,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 06:15:00",
+        "lat": -19.22,
+        "lon": 82.43,
+        "area_km2": 29864.0,
+        "mean_tb": 212.46,
+        "conv_core": 0.4692,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1216,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 06:45:00",
+        "lat": -19.22,
+        "lon": 82.39,
+        "area_km2": 31128.0,
+        "mean_tb": 214.01,
+        "conv_core": 0.4121,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0499,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 07:15:00",
+        "lat": -19.3,
+        "lon": 82.4,
+        "area_km2": 31844.0,
+        "mean_tb": 214.76,
+        "conv_core": 0.3743,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0724,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 07:45:00",
+        "lat": -19.38,
+        "lon": 82.33,
+        "area_km2": 31260.0,
+        "mean_tb": 215.39,
+        "conv_core": 0.3703,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1463,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 08:15:00",
+        "lat": -19.46,
+        "lon": 82.33,
+        "area_km2": 30964.0,
+        "mean_tb": 214.7,
+        "conv_core": 0.4089,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2805,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 08:45:00",
+        "lat": -19.46,
+        "lon": 82.29,
+        "area_km2": 30816.0,
+        "mean_tb": 213.87,
+        "conv_core": 0.4451,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.3413,
+        "pred_final": "INTENSIFYING",
+        "correct": false
+      },
+      {
+        "time": "2025-02-06 09:15:00",
+        "lat": -19.66,
+        "lon": 82.19,
+        "area_km2": 30796.0,
+        "mean_tb": 213.02,
+        "conv_core": 0.4676,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.3266,
+        "pred_final": "INTENSIFYING",
+        "correct": false
+      },
+      {
+        "time": "2025-02-06 09:45:00",
+        "lat": -19.7,
+        "lon": 82.11,
+        "area_km2": 30808.0,
+        "mean_tb": 212.98,
+        "conv_core": 0.4574,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2386,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 10:15:00",
+        "lat": -19.74,
+        "lon": 81.99,
+        "area_km2": 30480.0,
+        "mean_tb": 213.19,
+        "conv_core": 0.4486,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1153,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 10:45:00",
+        "lat": -19.7,
+        "lon": 81.95,
+        "area_km2": 30264.0,
+        "mean_tb": 213.86,
+        "conv_core": 0.4384,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0597,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 11:15:00",
+        "lat": -19.74,
+        "lon": 81.96,
+        "area_km2": 29920.0,
+        "mean_tb": 213.99,
+        "conv_core": 0.4425,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0424,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 11:45:00",
+        "lat": -19.7,
+        "lon": 81.84,
+        "area_km2": 29812.0,
+        "mean_tb": 214.34,
+        "conv_core": 0.4475,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0476,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 12:15:00",
+        "lat": -19.77,
+        "lon": 81.76,
+        "area_km2": 28936.0,
+        "mean_tb": 213.25,
+        "conv_core": 0.4873,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0546,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 12:45:00",
+        "lat": -19.77,
+        "lon": 81.68,
+        "area_km2": 28736.0,
+        "mean_tb": 212.72,
+        "conv_core": 0.5181,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.0864,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 13:15:00",
+        "lat": -19.77,
+        "lon": 81.57,
+        "area_km2": 28852.0,
+        "mean_tb": 212.31,
+        "conv_core": 0.5076,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1262,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 13:45:00",
+        "lat": -19.85,
+        "lon": 81.53,
+        "area_km2": 28428.0,
+        "mean_tb": 211.03,
+        "conv_core": 0.5423,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1599,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 14:15:00",
+        "lat": -19.85,
+        "lon": 81.45,
+        "area_km2": 28236.0,
+        "mean_tb": 209.06,
+        "conv_core": 0.5824,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2174,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 14:45:00",
+        "lat": -19.77,
+        "lon": 81.29,
+        "area_km2": 29244.0,
+        "mean_tb": 208.26,
+        "conv_core": 0.5934,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.2371,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 15:15:00",
+        "lat": -19.73,
+        "lon": 81.17,
+        "area_km2": 29576.0,
+        "mean_tb": 208.63,
+        "conv_core": 0.5644,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1806,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 15:45:00",
+        "lat": -19.69,
+        "lon": 81.05,
+        "area_km2": 29908.0,
+        "mean_tb": 208.38,
+        "conv_core": 0.5629,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1295,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 16:15:00",
+        "lat": -19.61,
+        "lon": 80.97,
+        "area_km2": 30476.0,
+        "mean_tb": 207.18,
+        "conv_core": 0.6018,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1179,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 16:45:00",
+        "lat": -19.61,
+        "lon": 80.97,
+        "area_km2": 30156.0,
+        "mean_tb": 205.96,
+        "conv_core": 0.6217,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1354,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 17:15:00",
+        "lat": -19.61,
+        "lon": 80.93,
+        "area_km2": 31460.0,
+        "mean_tb": 206.4,
+        "conv_core": 0.6032,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1414,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 17:45:00",
+        "lat": -19.61,
+        "lon": 80.85,
+        "area_km2": 32712.0,
+        "mean_tb": 207.42,
+        "conv_core": 0.5784,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1548,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 19:45:00",
+        "lat": -19.72,
+        "lon": 80.59,
+        "area_km2": 36912.0,
+        "mean_tb": 210.34,
+        "conv_core": 0.534,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1462,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 20:15:00",
+        "lat": -19.68,
+        "lon": 80.51,
+        "area_km2": 35596.0,
+        "mean_tb": 209.86,
+        "conv_core": 0.5456,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1069,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 20:45:00",
+        "lat": -19.72,
+        "lon": 80.47,
+        "area_km2": 35688.0,
+        "mean_tb": 210.54,
+        "conv_core": 0.5201,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1073,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 21:15:00",
+        "lat": -19.72,
+        "lon": 80.35,
+        "area_km2": 35620.0,
+        "mean_tb": 210.87,
+        "conv_core": 0.4971,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1329,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 21:45:00",
+        "lat": -19.76,
+        "lon": 80.27,
+        "area_km2": 36368.0,
+        "mean_tb": 211.09,
+        "conv_core": 0.4804,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1629,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 22:15:00",
+        "lat": -19.8,
+        "lon": 80.32,
+        "area_km2": 36644.0,
+        "mean_tb": 211.19,
+        "conv_core": 0.498,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1935,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 22:45:00",
+        "lat": -19.76,
+        "lon": 80.2,
+        "area_km2": 36164.0,
+        "mean_tb": 211.36,
+        "conv_core": 0.507,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1796,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 23:15:00",
+        "lat": -19.8,
+        "lon": 80.16,
+        "area_km2": 35304.0,
+        "mean_tb": 210.32,
+        "conv_core": 0.5324,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1909,
+        "pred_final": "NORMAL",
+        "correct": true
+      },
+      {
+        "time": "2025-02-06 23:45:00",
+        "lat": -19.84,
+        "lon": 79.97,
+        "area_km2": 37100.0,
+        "mean_tb": 211.18,
+        "conv_core": 0.4934,
+        "true_behavior": "STABLE",
+        "true_grouped": "NORMAL",
+        "s1_prob": 0.1864,
+        "pred_final": "NORMAL",
+        "correct": true
+      }
+    ]
+  }
+}
